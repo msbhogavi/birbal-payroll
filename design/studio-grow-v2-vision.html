@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KaushalStack Grow v2 — Stakeholder vision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --canvas: #F7F8FA;
+      --surface: #FFFFFF;
+      --muted: #F1F3F7;
+      --border: #E4E8EF;
+      --border-strong: #CBD2E0;
+      --text: #111827;
+      --text-2: #4B5563;
+      --text-3: #9CA3AF;
+      --accent: #1D4ED8;
+      --accent-hover: #1E40AF;
+      --accent-soft: #EFF6FF;
+      --success: #059669;
+      --success-soft: #ECFDF5;
+      --warning: #D97706;
+      --warning-soft: #FFFBEB;
+      --purple: #7C3AED;
+      --purple-soft: #F5F3FF;
+      --wa: #25D366;
+      --meta: #1877F2;
+      --shadow-sm: 0 1px 2px rgba(16,24,40,0.06);
+      --shadow-md: 0 8px 24px rgba(16,24,40,0.08);
+      --shadow-lg: 0 24px 60px rgba(16,24,40,0.12);
+      --radius: 16px;
+      --radius-sm: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: radial-gradient(1000px 500px at 0% -10%, #dbeafe 0%, transparent 55%),
+                  radial-gradient(800px 400px at 100% 0%, #ede9fe 0%, transparent 45%),
+                  var(--canvas);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px 16px 56px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; }
+
+    .stakeholder-banner {
+      background: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
+      color: white;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-md);
+    }
+
+    .stakeholder-banner h1 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 400;
+    }
+
+    .stakeholder-banner p {
+      font-size: 0.875rem;
+      opacity: 0.9;
+      margin-top: 4px;
+      max-width: 520px;
+    }
+
+    .vision-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .demo-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .demo-controls span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 4px;
+    }
+
+    .tab {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .tab:hover { border-color: var(--border-strong); color: var(--text); }
+    .tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+    .tab.phase { border-color: #c4b5fd; background: var(--purple-soft); color: var(--purple); }
+    .tab.phase.active { background: var(--purple); color: white; border-color: var(--purple); }
+
+    .app {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: 232px 1fr;
+      min-height: 760px;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+    }
+
+    .brand { display: flex; gap: 10px; padding: 4px 8px 16px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      display: grid; place-items: center; color: white; font-weight: 700; font-size: 0.8rem;
+    }
+    .brand-title { font-weight: 600; font-size: 0.9rem; }
+    .brand-sub { font-size: 0.68rem; color: var(--text-3); }
+
+    .nav-btn {
+      width: 100%; text-align: left; border: none; background: transparent;
+      padding: 10px 12px; border-radius: var(--radius-sm); font: inherit;
+      font-size: 0.875rem; color: var(--text-2); cursor: pointer;
+    }
+    .nav-btn:hover { background: var(--muted); color: var(--text); }
+    .nav-btn.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+    .pro-pill {
+      margin: 12px 8px 0;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--purple-soft);
+      border: 1px solid #ddd6fe;
+      font-size: 0.75rem;
+    }
+    .pro-pill strong { color: var(--purple); display: block; margin-bottom: 2px; }
+
+    .main { background: var(--canvas); padding: 24px 28px 32px; overflow-y: auto; }
+    .screen { display: none; animation: in 0.22s ease-out; }
+    .screen.active { display: block; }
+    @keyframes in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .serif { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+    .h-display { font-size: 2rem; line-height: 1.15; }
+    .h2 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; }
+    .sub { color: var(--text-2); font-size: 0.9375rem; margin-top: 6px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 18px; min-height: 44px; border-radius: var(--radius-sm);
+      font-size: 0.875rem; font-weight: 600; border: none; cursor: pointer; font-family: inherit;
+    }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: var(--surface); border: 1px solid var(--border-strong); color: var(--text); }
+    .btn-purple { background: var(--purple); color: white; }
+    .btn-ghost { background: transparent; color: var(--text-2); border: 1px solid transparent; }
+    .btn-sm { min-height: 36px; padding: 8px 14px; font-size: 0.8125rem; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Lifecycle stepper */
+    .lifecycle {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .phase-step {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .phase-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .phase-step.done:not(:last-child)::after { background: var(--success); }
+    .phase-step.active:not(:last-child)::after { background: linear-gradient(90deg, var(--success) 50%, var(--border) 50%); }
+
+    .phase-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--muted); border: 2px solid var(--border);
+      display: grid; place-items: center;
+      font-size: 0.7rem; font-weight: 700; color: var(--text-3);
+      margin: 0 auto 8px; position: relative; z-index: 1;
+    }
+
+    .phase-step.done .phase-dot { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .phase-step.active .phase-dot { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-sm); }
+
+    .phase-label { font-size: 0.65rem; font-weight: 600; color: var(--text-3); line-height: 1.3; }
+    .phase-step.active .phase-label { color: var(--accent); }
+
+    .tabs-inner {
+      display: flex; gap: 4px; margin-bottom: 20px;
+      border-bottom: 1px solid var(--border); padding-bottom: 0;
+    }
+
+    .tabs-inner button {
+      border: none; background: none; padding: 10px 16px;
+      font: inherit; font-size: 0.875rem; font-weight: 500;
+      color: var(--text-3); cursor: pointer; border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .tabs-inner button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+    .kpi { padding: 16px 18px; }
+    .kpi .val { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+    .kpi .lbl { font-size: 0.75rem; color: var(--text-3); margin-top: 4px; }
+    .kpi .delta { font-size: 0.75rem; font-weight: 600; color: var(--success); margin-top: 6px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    .insight-card { overflow: hidden; margin-bottom: 20px; }
+    .insight-inner { display: flex; }
+    .insight-bar { width: 4px; background: var(--accent); flex-shrink: 0; }
+    .insight-body { padding: 22px 24px; flex: 1; }
+    .insight-label { font-size: 0.72rem; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.04em; }
+    .insight-h { font-size: 1.25rem; font-weight: 600; margin: 8px 0 12px; }
+
+    .pillar {
+      padding: 14px 16px;
+      border-left: 3px solid var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .pillar:nth-child(2) { border-color: var(--purple); }
+    .pillar:nth-child(3) { border-color: var(--success); }
+    .pillar:nth-child(4) { border-color: var(--warning); }
+
+    .cal-mini {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      font-size: 0.7rem;
+      text-align: center;
+    }
+
+    .cal-day {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--muted);
+      color: var(--text-3);
+      position: relative;
+    }
+
+    .cal-day.has-post { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+    .cal-day.has-boost { box-shadow: inset 0 0 0 2px var(--purple); }
+    .cal-day.today { border: 2px solid var(--accent); }
+
+    .post-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 16px; border-bottom: 1px solid var(--border);
+    }
+
+    .post-row:last-child { border-bottom: none; }
+
+    .post-thumb {
+      width: 48px; height: 48px; border-radius: 10px;
+      background-size: cover; background-position: center; flex-shrink: 0;
+    }
+
+    .status {
+      font-size: 0.7rem; font-weight: 600; padding: 4px 10px;
+      border-radius: 999px; margin-left: auto; white-space: nowrap;
+    }
+
+    .status.live { background: var(--success-soft); color: var(--success); }
+    .status.scheduled { background: var(--accent-soft); color: var(--accent); }
+    .status.boost { background: var(--purple-soft); color: var(--purple); }
+    .status.draft { background: var(--muted); color: var(--text-3); }
+    .status.review { background: var(--warning-soft); color: var(--warning); }
+
+    .phone {
+      max-width: 320px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--surface);
+    }
+
+    .phone-head { padding: 12px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+    .phone-media { aspect-ratio: 4/5; background-size: cover; background-position: center; }
+    .phone-cap { padding: 12px 14px; font-size: 0.8125rem; line-height: 1.5; }
+
+    .avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+
+    .wizard-steps { display: flex; gap: 8px; margin-bottom: 24px; }
+    .wizard-step {
+      flex: 1; padding: 12px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); font-size: 0.8125rem; color: var(--text-3);
+    }
+    .wizard-step.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+    .wizard-step.done { border-color: var(--success); color: var(--success); }
+
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .chip {
+      padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border);
+      font-size: 0.8125rem; cursor: pointer; background: var(--surface);
+    }
+    .chip.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+    .rec-card {
+      padding: 16px 18px;
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .rec-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-size: 1rem; flex-shrink: 0;
+    }
+
+    .field label { display: block; font-size: 0.8125rem; font-weight: 600; margin-bottom: 8px; }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm); font: inherit;
+    }
+
+    .report-preview {
+      padding: 32px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .report-preview h3 { font-size: 1.25rem; margin-bottom: 16px; }
+    .report-bar { height: 8px; border-radius: 999px; background: var(--muted); margin: 8px 0 16px; overflow: hidden; }
+    .report-bar span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 1100px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .vision-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="stakeholder-banner">
+      <div>
+        <div class="vision-badge">v2 vision · stakeholder demo</div>
+        <h1>KaushalStack Grow</h1>
+        <p>Full marketing lifecycle for Indian SMBs: plan, create, approve, publish, boost, and optimize with bookings tied to your site.</p>
+      </div>
+      <button class="btn btn-secondary" style="background:rgba(255,255,255,0.95)" data-goto="vision">See 7-phase map</button>
+    </div>
+
+    <div class="demo-controls" id="tabBar"></div>
+
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">KS</div>
+          <div>
+            <div class="brand-title">KaushalStack</div>
+            <div class="brand-sub">ReFunction Rehab</div>
+          </div>
+        </div>
+        <button class="nav-btn active" data-goto="g0">Grow</button>
+        <button class="nav-btn" data-goto="c1">Campaigns</button>
+        <button class="nav-btn" data-goto="c2">Active campaign</button>
+        <button class="nav-btn" data-goto="cal">Calendar</button>
+        <button class="nav-btn" data-goto="boost">Boost</button>
+        <button class="nav-btn" data-goto="perf">Performance</button>
+        <div class="pro-pill">
+          <strong>Pro mode on</strong>
+          Full agency lifecycle unlocked
+        </div>
+      </aside>
+
+      <main class="main">
+        <!-- VISION MAP -->
+        <section class="screen active" data-screen="vision">
+          <h2 class="h-display serif">From brief to bookings, one loop</h2>
+          <p class="sub">What social agencies deliver today, composed inside KaushalStack with ops-linked results.</p>
+
+          <div class="vision-grid" style="margin-top:28px">
+            <div class="card" style="padding:18px;text-align:center">
+              <div style="font-size:1.5rem;margin-bottom:8px">1</div>
+              <strong style="font-size:0.85rem">Discover</strong>
+              <p style="font-size:0.75rem;color:var(--text-3);margin-top:6px">Brief, audience, competitors</p>
+            </div>
+            <div class="card" style="padding:18px;text-align:center">
+              <div style="font-size:1.5rem;margin-bottom:8px">2</div>
+              <strong style="font-size:0.85rem">Plan</strong>
+              <p style="font-size:0.75rem;color:var(--text-3);margin-top:6px">Pillars and calendar</p>
+            </div>
+            <div class="card" style="padding:18px;text-align:center">
+              <div style="font-size:1.5rem;margin-bottom:8px">3</div>
+              <strong style="font-size:0.85rem">Create</strong>
+              <p style="font-size:0.75rem;color:var(--text-3);margin-top:6px">Posts and variants</p>
+            </div>
+            <div class="card" style="padding:18px;text-align:center">
+              <div style="font-size:1.5rem;margin-bottom:8px">4</div>
+              <strong style="font-size:0.85rem">Approve</strong>
+              <p style="font-size:0.75rem;color:var(--text-3);margin-top:6px">Client sign-off</p>
+            </div>
+            <div class="card" style="padding:18px;text-align:center">
+              <div style="font-size:1.5rem;margin-bottom:8px">5</div>
+              <strong style="font-size:0.85rem">Publish</strong>
+              <p style="font-size:0.75rem;color:var(--text-3);margin-top:6px">Schedule organic</p>
+            </div>
+            <div class="card" style="padding:18px;text-align:center">
+              <div style="font-size:1.5rem;margin-bottom:8px">6</div>
+              <strong style="font-size:0.85rem">Boost</strong>
+              <p style="font-size:0.75rem;color:var(--text-3);margin-top:6px">Paid local reach</p>
+            </div>
+            <div class="card" style="padding:18px;text-align:center;border-color:#a7f3d0;background:var(--success-soft)">
+              <div style="font-size:1.5rem;margin-bottom:8px">7</div>
+              <strong style="font-size:0.85rem;color:var(--success)">Optimize</strong>
+              <p style="font-size:0.75rem;color:var(--success);margin-top:6px">Metrics + bookings</p>
+            </div>
+          </div>
+
+          <div class="card grid-2" style="margin-top:28px;padding:24px;gap:24px">
+            <div>
+              <h3 class="h2" style="font-size:1.1rem;margin-bottom:12px">Why KaushalStack wins</h3>
+              <ul style="list-style:none;font-size:0.9375rem;color:var(--text-2)">
+                <li style="padding:8px 0;border-bottom:1px solid var(--border)">Bookings on your site, not just likes on Instagram</li>
+                <li style="padding:8px 0;border-bottom:1px solid var(--border)">One tenant: site, WhatsApp, ops, and Grow</li>
+                <li style="padding:8px 0;border-bottom:1px solid var(--border)">Simple mode for owners, pro mode for agencies</li>
+                <li style="padding:8px 0">Honest metrics. You pay Meta directly for boost.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="h2" style="font-size:1.1rem;margin-bottom:12px">Demo path</h3>
+              <p class="sub" style="margin-bottom:16px">Walk stakeholders: Home → Brief → Command center → Boost → Performance → Report</p>
+              <button class="btn btn-primary" data-goto="g0">Start walkthrough</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- G0 -->
+        <section class="screen" data-screen="g0">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
+            <div>
+              <h2 class="h-display serif">Grow</h2>
+              <p class="sub">Posts that match what's happening in your business.</p>
+            </div>
+            <a href="#" style="color:var(--accent);font-size:0.875rem;font-weight:500;margin-top:8px">Growth report</a>
+          </div>
+
+          <div class="card insight-card">
+            <div class="insight-inner">
+              <div class="insight-bar"></div>
+              <div class="insight-body">
+                <div class="insight-label">Suggested for you</div>
+                <div class="insight-h">3 Friday slots are still open</div>
+                <ul style="list-style:none;color:var(--text-2);font-size:0.9375rem;margin-bottom:18px">
+                  <li style="margin-bottom:4px">· Thursday has 0 bookings vs your usual 4</li>
+                  <li>· Similar clinics post offers on Wednesday</li>
+                </ul>
+                <button class="btn btn-primary" data-goto="q2">Preview suggested post</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:20px;margin-bottom:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <strong>Active campaign performance</strong>
+              <button class="btn btn-ghost btn-sm" data-goto="perf">View all</button>
+            </div>
+            <div class="kpi-row" style="margin:0">
+              <div class="kpi card" style="box-shadow:none">
+                <div class="val">12.4k</div>
+                <div class="lbl">Reach this week</div>
+                <div class="delta">↑ 18%</div>
+              </div>
+              <div class="kpi card" style="box-shadow:none">
+                <div class="val">4</div>
+                <div class="lbl">Bookings</div>
+                <div class="delta">From site link</div>
+              </div>
+              <div class="kpi card" style="box-shadow:none">
+                <div class="val">Rs 585</div>
+                <div class="lbl">Cost per booking</div>
+              </div>
+              <div class="kpi card" style="box-shadow:none">
+                <div class="val" style="color:var(--purple)">Active</div>
+                <div class="lbl">Boost running</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-secondary" data-goto="d1">New campaign (pro brief)</button>
+            <button class="btn btn-secondary" data-goto="c1">View campaigns</button>
+          </div>
+        </section>
+
+        <!-- D1 Brief -->
+        <section class="screen" data-screen="d1">
+          <h2 class="h2">Campaign brief</h2>
+          <p class="sub">Phase 1: Discover and plan like an agency.</p>
+
+          <div class="lifecycle">
+            <div class="phase-step active"><div class="phase-dot">1</div><div class="phase-label">Discover</div></div>
+            <div class="phase-step"><div class="phase-dot">2</div><div class="phase-label">Plan</div></div>
+            <div class="phase-step"><div class="phase-dot">3</div><div class="phase-label">Create</div></div>
+            <div class="phase-step"><div class="phase-dot">4</div><div class="phase-label">Approve</div></div>
+            <div class="phase-step"><div class="phase-dot">5</div><div class="phase-label">Publish</div></div>
+            <div class="phase-step"><div class="phase-dot">6</div><div class="phase-label">Boost</div></div>
+            <div class="phase-step"><div class="phase-dot">7</div><div class="phase-label">Optimize</div></div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Campaign name</label>
+                <input type="text" value="Monsoon knee-care, August 2026" />
+              </div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Objective</label>
+                <div class="chip-row">
+                  <span class="chip">Awareness</span>
+                  <span class="chip active">Bookings</span>
+                  <span class="chip">Footfall</span>
+                  <span class="chip">Event sign-ups</span>
+                </div>
+              </div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Audience</label>
+                <div class="chip-row">
+                  <span class="chip active">Ages 35–54</span>
+                  <span class="chip active">Within 8 km</span>
+                  <span class="chip">Like current customers</span>
+                </div>
+              </div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Budget intent</label>
+                <div class="chip-row">
+                  <span class="chip">Organic only</span>
+                  <span class="chip active">Organic + boost Rs 500/day</span>
+                  <span class="chip">Decide later</span>
+                </div>
+              </div>
+              <button class="btn btn-primary" data-goto="c2">Create campaign</button>
+            </div>
+            <div class="card" style="padding:20px;background:var(--accent-soft);border-color:#bfdbfe">
+              <strong style="font-size:0.8125rem;color:var(--accent)">FROM GROWTH CHARTER</strong>
+              <p style="font-size:0.9375rem;margin-top:12px;line-height:1.55;color:var(--text-2)">Two physio clinics within 5 km ran monsoon offers last week. Both used mid-week posts with a Friday deadline.</p>
+              <p style="font-size:0.8125rem;color:var(--text-3);margin-top:12px">Competitor insight · Updated 2 days ago</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- C2 Command center -->
+        <section class="screen" data-screen="c2">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:8px">
+            <div>
+              <h2 class="h2">Monsoon knee-care, August 2026</h2>
+              <p class="sub">Goal: Bookings · Aug 1–31 · <span style="color:var(--success);font-weight:600">Live + optimizing</span></p>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-secondary btn-sm">Share report</button>
+              <button class="btn btn-primary btn-sm" data-goto="q2">Add post</button>
+            </div>
+          </div>
+
+          <div class="lifecycle">
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Discover</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Plan</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Create</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Approve</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Publish</div></div>
+            <div class="phase-step active"><div class="phase-dot">6</div><div class="phase-label">Boost</div></div>
+            <div class="phase-step"><div class="phase-dot">7</div><div class="phase-label">Optimize</div></div>
+          </div>
+
+          <div class="tabs-inner" id="c2Tabs">
+            <button class="active" data-panel="overview">Overview</button>
+            <button data-panel="plan">Plan</button>
+            <button data-panel="posts">Posts</button>
+            <button data-panel="boost-tab">Boost</button>
+            <button data-panel="perf-tab">Performance</button>
+          </div>
+
+          <div id="panel-overview">
+            <div class="kpi-row">
+              <div class="card kpi"><div class="val">8</div><div class="lbl">Posts created</div></div>
+              <div class="card kpi"><div class="val">5</div><div class="lbl">Published</div></div>
+              <div class="card kpi"><div class="val">2</div><div class="lbl">Boosts active</div></div>
+              <div class="card kpi"><div class="val">4</div><div class="lbl">Bookings</div></div>
+            </div>
+            <div class="card rec-card">
+              <div class="rec-icon">↗</div>
+              <div style="flex:1">
+                <strong>Scale top post</strong>
+                <p style="font-size:0.875rem;color:var(--text-2);margin-top:4px">Friday offer drove 3 bookings. Add Rs 300/day for 3 more days.</p>
+                <button class="btn btn-primary btn-sm" style="margin-top:10px" data-goto="boost">Apply recommendation</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="panel-plan" style="display:none">
+            <div class="grid-2">
+              <div class="card" style="padding:18px">
+                <strong style="display:block;margin-bottom:14px">Content pillars</strong>
+                <div class="card pillar"><strong>Offer</strong><br><span style="font-size:0.8125rem;color:var(--text-2)">20% off assessments</span></div>
+                <div class="card pillar"><strong>Education</strong><br><span style="font-size:0.8125rem;color:var(--text-2)">Monsoon knee care tips</span></div>
+                <div class="card pillar"><strong>Trust</strong><br><span style="font-size:0.8125rem;color:var(--text-2)">Patient recovery stories</span></div>
+                <div class="card pillar"><strong>Urgency</strong><br><span style="font-size:0.8125rem;color:var(--text-2)">Friday slot reminders</span></div>
+              </div>
+              <div class="card" style="padding:18px">
+                <strong style="display:block;margin-bottom:14px">August calendar</strong>
+                <div class="cal-mini" style="margin-bottom:8px">
+                  <span style="color:var(--text-3)">M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                </div>
+                <div class="cal-mini">
+                  <div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div>
+                  <div class="cal-day has-post">1</div><div class="cal-day"></div><div class="cal-day"></div>
+                  <div class="cal-day"></div><div class="cal-day has-post">5</div><div class="cal-day"></div><div class="cal-day"></div>
+                  <div class="cal-day has-post has-boost">8</div><div class="cal-day today has-post">9</div><div class="cal-day"></div>
+                  <div class="cal-day"></div><div class="cal-day"></div><div class="cal-day has-post">14</div><div class="cal-day"></div>
+                  <div class="cal-day has-post">16</div><div class="cal-day"></div><div class="cal-day"></div>
+                </div>
+                <p style="font-size:0.75rem;color:var(--text-3);margin-top:12px">Blue = post · Purple ring = boost</p>
+                <button class="btn btn-secondary btn-sm" style="margin-top:12px" data-goto="cal">Open full calendar</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="panel-posts" style="display:none">
+            <div class="card">
+              <div class="post-row">
+                <div class="post-thumb" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=100&h=100&fit=crop')"></div>
+                <div><strong style="font-size:0.875rem">Friday slot offer</strong><br><span style="font-size:0.75rem;color:var(--text-3)">Instagram · Published Aug 9</span></div>
+                <span class="status boost">Boost active</span>
+              </div>
+              <div class="post-row">
+                <div class="post-thumb" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop')"></div>
+                <div><strong style="font-size:0.875rem">Monsoon education carousel</strong><br><span style="font-size:0.75rem;color:var(--text-3)">Instagram · Scheduled Aug 16</span></div>
+                <span class="status scheduled">Scheduled</span>
+              </div>
+              <div class="post-row">
+                <div class="post-thumb" style="background:#e5e7eb"></div>
+                <div><strong style="font-size:0.875rem">WhatsApp broadcast</strong><br><span style="font-size:0.75rem;color:var(--text-3)">Copied Aug 5</span></div>
+                <span class="status live">Copied</span>
+              </div>
+              <div class="post-row">
+                <div class="post-thumb" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50f?w=100&h=100&fit=crop')"></div>
+                <div><strong style="font-size:0.875rem">Trust story variant B</strong><br><span style="font-size:0.75rem;color:var(--text-3)">Instagram · Draft</span></div>
+                <span class="status review">Pending review</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="panel-boost-tab" style="display:none">
+            <div class="card" style="padding:18px;margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div><strong>Friday slot offer</strong><br><span style="font-size:0.8125rem;color:var(--text-3)">Rs 500/day · 7 days · Local 8 km</span></div>
+                <span class="status boost">Active · Rs 2,340 spent</span>
+              </div>
+            </div>
+            <button class="btn btn-purple" data-goto="boost">Create new boost</button>
+          </div>
+
+          <div id="panel-perf-tab" style="display:none">
+            <p class="sub" style="margin-bottom:12px">See full dashboard</p>
+            <button class="btn btn-primary" data-goto="perf">Open performance</button>
+          </div>
+        </section>
+
+        <!-- Q2 Preview -->
+        <section class="screen" data-screen="q2">
+          <h2 class="h2">Suggested post</h2>
+          <p class="sub">Phase 3: Create · Monsoon knee-care campaign</p>
+          <div class="grid-2" style="margin-top:20px">
+            <div class="phone">
+              <div class="phone-head">
+                <img class="avatar" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=64&h=64&fit=crop" alt="" />
+                <div><strong style="font-size:0.8125rem">refunction_rehab</strong><br><span style="font-size:0.7rem;color:var(--text-3)">Instagram</span></div>
+              </div>
+              <div class="phone-media" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=600&h=750&fit=crop')"></div>
+              <div class="phone-cap">Monsoon knee-care: 20% off physio assessments in August. Book via link in bio.</div>
+            </div>
+            <div>
+              <div class="card" style="padding:16px;margin-bottom:16px;border-left:3px solid var(--wa)">
+                <strong style="font-size:0.875rem">WhatsApp message</strong>
+                <p style="font-size:0.8125rem;color:var(--text-2);margin:10px 0">Hi! 20% off assessments this August at ReFunction Rehab. Book: refunction.in/aug</p>
+                <button class="btn btn-secondary btn-sm">Copy message</button>
+              </div>
+              <div class="card" style="padding:16px;margin-bottom:16px">
+                <strong style="font-size:0.875rem">Approval</strong>
+                <p style="font-size:0.8125rem;color:var(--text-2);margin:8px 0">Sent to raj@email.com · Approved Aug 7</p>
+                <button class="btn btn-ghost btn-sm">Share for review</button>
+              </div>
+              <button class="btn btn-primary" style="width:100%;margin-bottom:8px" data-goto="boost">Publish and promote</button>
+              <button class="btn btn-ghost" data-goto="c2">Save to campaign</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Calendar -->
+        <section class="screen" data-screen="cal">
+          <h2 class="h2">Content calendar</h2>
+          <p class="sub">Phase 5: Publish · All campaigns · August 2026</p>
+          <div class="card" style="padding:20px;margin-top:20px">
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;font-size:0.8125rem">
+              <div style="font-weight:600;color:var(--text-3);padding:8px">Mon</div>
+              <div style="font-weight:600;color:var(--text-3);padding:8px">Tue</div>
+              <div style="font-weight:600;color:var(--text-3);padding:8px">Wed</div>
+              <div style="font-weight:600;color:var(--text-3);padding:8px">Thu</div>
+              <div style="font-weight:600;color:var(--text-3);padding:8px">Fri</div>
+              <div style="font-weight:600;color:var(--text-3);padding:8px">Sat</div>
+              <div style="font-weight:600;color:var(--text-3);padding:8px">Sun</div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--accent-soft);border-color:#bfdbfe">
+                <strong>1</strong><br><span style="font-size:0.7rem">IG Offer</span>
+              </div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--accent-soft)"><strong>5</strong><br><span style="font-size:0.7rem">WA copy</span></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--muted)"></div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--purple-soft);border-color:#ddd6fe">
+                <strong>8</strong><br><span style="font-size:0.7rem">Boost start</span>
+              </div>
+              <div class="card" style="padding:10px;min-height:80px;background:var(--success-soft);border-color:#a7f3d0">
+                <strong>9</strong><br><span style="font-size:0.7rem">IG Live</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Boost wizard -->
+        <section class="screen" data-screen="boost">
+          <h2 class="h2">Promote post</h2>
+          <p class="sub">Phase 6: Boost · Guided paid promotion · You pay Meta directly</p>
+
+          <div class="wizard-steps">
+            <div class="wizard-step done">1 · Objective</div>
+            <div class="wizard-step done">2 · Audience</div>
+            <div class="wizard-step active">3 · Budget</div>
+            <div class="wizard-step">4 · Review</div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Objective</label>
+                <div class="chip-row">
+                  <span class="chip">Profile visits</span>
+                  <span class="chip active">Link clicks</span>
+                  <span class="chip">Messages</span>
+                  <span class="chip">Bookings</span>
+                </div>
+              </div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Audience</label>
+                <div class="chip-row">
+                  <span class="chip active">Local · 8 km Pune</span>
+                  <span class="chip">Followers</span>
+                  <span class="chip">Custom</span>
+                </div>
+              </div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Daily budget (Rs)</label>
+                <input type="text" value="500" />
+              </div>
+              <div class="field" style="margin-bottom:16px">
+                <label>Duration</label>
+                <div class="chip-row">
+                  <span class="chip">3 days</span>
+                  <span class="chip active">7 days</span>
+                  <span class="chip">14 days</span>
+                </div>
+              </div>
+              <p style="font-size:0.8125rem;color:var(--text-3);margin-bottom:16px">Estimated reach: 8,000–14,000 people locally. Not a guarantee.</p>
+              <button class="btn btn-purple" data-goto="perf">Start boost</button>
+            </div>
+            <div class="phone">
+              <div class="phone-media" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=600&h=750&fit=crop')"></div>
+              <div class="phone-cap" style="font-size:0.75rem;color:var(--text-3)">Post being promoted</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Performance -->
+        <section class="screen" data-screen="perf">
+          <h2 class="h2">Performance</h2>
+          <p class="sub">Phase 7: Track and optimize · Ops-linked results</p>
+
+          <div class="lifecycle">
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Discover</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Plan</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Create</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Approve</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Publish</div></div>
+            <div class="phase-step done"><div class="phase-dot">✓</div><div class="phase-label">Boost</div></div>
+            <div class="phase-step active"><div class="phase-dot">7</div><div class="phase-label">Optimize</div></div>
+          </div>
+
+          <div class="kpi-row">
+            <div class="card kpi"><div class="val">12,400</div><div class="lbl">Reach</div><div class="delta">↑ 18%</div></div>
+            <div class="card kpi"><div class="val">186</div><div class="lbl">Link clicks</div></div>
+            <div class="card kpi"><div class="val">4</div><div class="lbl">Bookings</div><div class="delta">On your site</div></div>
+            <div class="card kpi"><div class="val">Rs 2,340</div><div class="lbl">Ad spend</div></div>
+          </div>
+
+          <div class="card" style="padding:18px;margin-bottom:20px;background:var(--success-soft);border-color:#a7f3d0">
+            <strong style="color:var(--success)">Cost per booking: Rs 585</strong>
+            <p style="font-size:0.875rem;color:var(--text-2);margin-top:6px">4 bookings from tracked link refunction.in/aug?utm_campaign=monsoon</p>
+          </div>
+
+          <strong style="display:block;margin-bottom:12px">Recommendations</strong>
+          <div class="card rec-card">
+            <div class="rec-icon">↗</div>
+            <div><strong>Scale Friday offer boost</strong><p style="font-size:0.875rem;color:var(--text-2);margin-top:4px">Add Rs 300/day for 3 days</p><button class="btn btn-primary btn-sm" style="margin-top:8px" data-goto="boost">Apply</button></div>
+          </div>
+          <div class="card rec-card">
+            <div class="rec-icon">✎</div>
+            <div><strong>Refresh low-click post</strong><p style="font-size:0.875rem;color:var(--text-2);margin-top:4px">Trust story variant B: 12 clicks. Try new headline.</p><button class="btn btn-secondary btn-sm" style="margin-top:8px" data-goto="q2">Create variant</button></div>
+          </div>
+          <div class="card rec-card">
+            <div class="rec-icon">⏸</div>
+            <div><strong>Pause underperforming boost</strong><p style="font-size:0.875rem;color:var(--text-2);margin-top:4px">Education post boost: 0 bookings after Rs 800</p><button class="btn btn-secondary btn-sm" style="margin-top:8px">Pause</button></div>
+          </div>
+
+          <button class="btn btn-secondary" style="margin-top:16px" data-goto="report">Export client report</button>
+        </section>
+
+        <!-- Report -->
+        <section class="screen" data-screen="report">
+          <h2 class="h2">Campaign report</h2>
+          <p class="sub">Share with client or stakeholder · PDF or link</p>
+          <div class="report-preview" style="margin-top:24px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
+              <div>
+                <p style="font-size:0.75rem;color:var(--text-3);text-transform:uppercase">ReFunction Rehab</p>
+                <h3>Monsoon knee-care, August 2026</h3>
+              </div>
+              <div class="brand-mark" style="width:40px;height:40px">KS</div>
+            </div>
+            <p style="font-size:0.875rem;color:var(--text-2);margin-bottom:20px">Objective: More bookings · Aug 1–31, 2026</p>
+            <div class="grid-2" style="gap:16px;margin-bottom:20px">
+              <div><strong style="font-size:0.75rem;color:var(--text-3)">REACH</strong><br><span style="font-size:1.25rem;font-weight:700">12,400</span></div>
+              <div><strong style="font-size:0.75rem;color:var(--text-3)">BOOKINGS</strong><br><span style="font-size:1.25rem;font-weight:700;color:var(--success)">4</span></div>
+            </div>
+            <p style="font-size:0.8125rem;margin-bottom:8px">Top post: Friday slot offer</p>
+            <div class="report-bar"><span style="width:75%"></span></div>
+            <p style="font-size:0.8125rem;color:var(--text-2)">Ad spend Rs 2,340 · Cost per booking Rs 585</p>
+            <p style="font-size:0.75rem;color:var(--text-3);margin-top:24px;border-top:1px solid var(--border);padding-top:16px">Prepared by KaushalStack Grow · Honest metrics, no guaranteed ROAS</p>
+          </div>
+          <div style="text-align:center;margin-top:20px">
+            <button class="btn btn-primary">Download PDF</button>
+            <button class="btn btn-secondary">Copy share link</button>
+          </div>
+        </section>
+
+        <!-- C1 list -->
+        <section class="screen" data-screen="c1">
+          <div style="display:flex;justify-content:space-between;margin-bottom:20px">
+            <div><h2 class="h2">Campaigns</h2><p class="sub">All active and past campaigns</p></div>
+            <button class="btn btn-primary" data-goto="d1">New campaign</button>
+          </div>
+          <div class="grid-3">
+            <div class="card" style="overflow:hidden;cursor:pointer" data-goto="c2">
+              <div style="height:100px;background:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=400&h=120&fit=crop') center/cover"></div>
+              <div style="padding:14px">
+                <strong style="font-size:0.9375rem">Monsoon knee-care</strong>
+                <p style="font-size:0.75rem;color:var(--text-3);margin:6px 0">Live · 4 bookings</p>
+                <span class="status live" style="margin:0">Optimizing</span>
+              </div>
+            </div>
+            <div class="card" style="overflow:hidden">
+              <div style="height:100px;background:url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=120&fit=crop') center/cover"></div>
+              <div style="padding:14px">
+                <strong style="font-size:0.9375rem">Trust workshop</strong>
+                <p style="font-size:0.75rem;color:var(--text-3);margin:6px 0">In review · 3 posts</p>
+                <span class="status review" style="margin:0">Pending</span>
+              </div>
+            </div>
+            <div class="card" style="overflow:hidden">
+              <div style="height:100px;background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=120&fit=crop') center/cover"></div>
+              <div style="padding:14px">
+                <strong style="font-size:0.9375rem">Independence day offer</strong>
+                <p style="font-size:0.75rem;color:var(--text-3);margin:6px 0">Completed · Aug 2025</p>
+                <span class="status draft" style="margin:0">Archived</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const screens = [
+      { id: "vision", label: "Vision map", group: "intro" },
+      { id: "g0", label: "Grow home", group: "flow" },
+      { id: "d1", label: "1 · Brief", group: "phase" },
+      { id: "c2", label: "Command center", group: "flow" },
+      { id: "q2", label: "3 · Create post", group: "phase" },
+      { id: "cal", label: "5 · Calendar", group: "phase" },
+      { id: "boost", label: "6 · Boost", group: "phase" },
+      { id: "perf", label: "7 · Performance", group: "phase" },
+      { id: "report", label: "Report", group: "flow" },
+      { id: "c1", label: "Campaigns", group: "flow" },
+    ];
+
+    function setScreen(id) {
+      document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("active", s.dataset.screen === id));
+      document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.dataset.screen === id));
+      document.querySelectorAll(".nav-btn").forEach((n) => {
+        const map = { g0: "g0", c1: "c1", c2: "c2", cal: "cal", boost: "boost", perf: "perf" };
+        n.classList.toggle("active", map[n.dataset.goto] === id);
+      });
+    }
+
+    const tabBar = document.getElementById("tabBar");
+    let lastGroup = "";
+    screens.forEach(({ id, label, group }) => {
+      if (group === "phase" && lastGroup !== "phase") {
+        const span = document.createElement("span");
+        span.textContent = "Phases";
+        tabBar.appendChild(span);
+      }
+      if (group === "flow" && lastGroup !== "flow" && lastGroup !== "intro") {
+        const span = document.createElement("span");
+        span.textContent = "Screens";
+        tabBar.appendChild(span);
+      }
+      lastGroup = group;
+      const btn = document.createElement("button");
+      btn.className = "tab" + (group === "phase" ? " phase" : "") + (id === "vision" ? " active" : "");
+      btn.dataset.screen = id;
+      btn.textContent = label;
+      btn.onclick = () => setScreen(id);
+      tabBar.appendChild(btn);
+    });
+
+    document.querySelectorAll("[data-goto]").forEach((el) => {
+      el.addEventListener("click", () => setScreen(el.dataset.goto));
+    });
+
+    document.getElementById("c2Tabs").querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.getElementById("c2Tabs").querySelectorAll("button").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        ["overview", "plan", "posts", "boost-tab", "perf-tab"].forEach((p) => {
+          const el = document.getElementById("panel-" + p);
+          if (el) el.style.display = btn.dataset.panel === p ? "block" : "none";
+        });
+      });
+    });
+  </script>
+</body>
+</html>

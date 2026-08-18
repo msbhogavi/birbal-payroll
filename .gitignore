@@ -1,0 +1,28 @@
+# Dependencies & build
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS & editors
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Agent temp / local scratch
+agents/tmp/*
+!agents/tmp/.gitkeep
+
+# Cursor local (optional — keep skills in repo)
+.cursor/projects/

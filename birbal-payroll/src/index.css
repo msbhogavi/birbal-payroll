@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+
+  --color-canvas: var(--color-canvas);
+  --color-surface: var(--color-surface);
+  --color-surface-sidebar: var(--color-surface-sidebar);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-surface-preview: var(--color-surface-preview);
+  --color-surface-locked: var(--color-surface-locked);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-action: var(--color-action);
+  --color-action-hover: var(--color-action-hover);
+  --color-action-soft: var(--color-action-soft);
+  --color-action-foreground: var(--color-action-foreground);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-status-paid: var(--color-status-paid);
+  --color-status-paid-bg: var(--color-status-paid-bg);
+  --color-status-pending: var(--color-status-pending);
+  --color-status-pending-bg: var(--color-status-pending-bg);
+  --color-status-hold: var(--color-status-hold);
+  --color-status-error: var(--color-status-error);
+  --color-status-error-bg: var(--color-status-error-bg);
+  --color-status-locked: var(--color-status-locked);
+  --color-status-active: var(--color-status-active);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --spacing-input-h: 2.25rem;
+  --spacing-table-row: 2.75rem;
+}
+
+:root {
+  --color-canvas: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-surface-sidebar: #fafbfc;
+  --color-surface-muted: #eef0f4;
+  --color-surface-preview: #f8f9fb;
+  --color-surface-locked: #f3f4f6;
+  --color-border: #e2e5eb;
+  --color-border-strong: #c5cad3;
+  --color-action: #0d9488;
+  --color-action-hover: #0f766e;
+  --color-action-soft: #ccfbf1;
+  --color-action-foreground: #ffffff;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #94a3b8;
+  --color-status-paid: #047857;
+  --color-status-paid-bg: #ecfdf5;
+  --color-status-pending: #b45309;
+  --color-status-pending-bg: #fffbeb;
+  --color-status-hold: #6d28d9;
+  --color-status-error: #b91c1c;
+  --color-status-error-bg: #fef2f2;
+  --color-status-locked: #6b7280;
+  --color-status-active: #0d9488;
+
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 8px 24px rgb(15 23 42 / 0.08);
+  --focus-ring: 0 0 0 2px var(--color-canvas), 0 0 0 4px var(--color-action);
+}
+
+@layer base {
+  * {
+    @apply border-[var(--color-border)];
+  }
+
+  body {
+    @apply min-h-screen bg-[var(--color-canvas)] font-sans text-[var(--color-text-primary)] antialiased;
+    font-feature-settings: "tnum" 1;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

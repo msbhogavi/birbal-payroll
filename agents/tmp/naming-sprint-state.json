@@ -1,0 +1,994 @@
+{
+  "started_at": "2026-08-17T23:37:27.865042+00:00",
+  "max_rounds": 5,
+  "current_round": 3,
+  "target_count": 15,
+  "per_round": 15,
+  "available_pool": [
+    {
+      "brand": "Signova",
+      "strategy": "",
+      "available_domains": [
+        "signova.co"
+      ],
+      "taken_domains": [
+        "signova.com",
+        "signova.in",
+        "getsignova.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Leadora",
+      "strategy": "",
+      "available_domains": [
+        "leadora.in",
+        "leadora.co"
+      ],
+      "taken_domains": [
+        "leadora.com",
+        "getleadora.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Growtic",
+      "strategy": "",
+      "available_domains": [
+        "getgrowtic.com",
+        "growtic.co"
+      ],
+      "taken_domains": [
+        "growtic.com",
+        "growtic.in"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Markova",
+      "strategy": "",
+      "available_domains": [
+        "markova.in",
+        "getmarkova.com",
+        "markova.co"
+      ],
+      "taken_domains": [
+        "markova.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Enquora",
+      "strategy": "",
+      "available_domains": [
+        "enquora.in",
+        "getenquora.com",
+        "enquora.co"
+      ],
+      "taken_domains": [
+        "enquora.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Custora",
+      "strategy": "",
+      "available_domains": [
+        "getcustora.com",
+        "custora.co"
+      ],
+      "taken_domains": [
+        "custora.com",
+        "custora.in"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Pulselink",
+      "strategy": "",
+      "available_domains": [
+        "getpulselink.com",
+        "pulselink.co"
+      ],
+      "taken_domains": [
+        "pulselink.com",
+        "pulselink.in"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Biznova",
+      "strategy": "",
+      "available_domains": [
+        "getbiznova.com",
+        "biznova.co"
+      ],
+      "taken_domains": [
+        "biznova.com",
+        "biznova.in"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Spandan",
+      "strategy": "",
+      "available_domains": [
+        "getspandan.com",
+        "spandan.co"
+      ],
+      "taken_domains": [
+        "spandan.com",
+        "spandan.in"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Anvesh",
+      "strategy": "",
+      "available_domains": [
+        "getanvesh.com",
+        "anvesh.co"
+      ],
+      "taken_domains": [
+        "anvesh.com",
+        "anvesh.in"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Pravah",
+      "strategy": "",
+      "available_domains": [
+        "pravah.co"
+      ],
+      "taken_domains": [
+        "pravah.com",
+        "pravah.in",
+        "getpravah.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Yukti",
+      "strategy": "",
+      "available_domains": [
+        "yukti.co"
+      ],
+      "taken_domains": [
+        "yukti.com",
+        "yukti.in",
+        "getyukti.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Dvara",
+      "strategy": "",
+      "available_domains": [
+        "getdvara.com",
+        "dvara.co"
+      ],
+      "taken_domains": [
+        "dvara.com",
+        "dvara.in"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Grahak",
+      "strategy": "",
+      "available_domains": [
+        "grahak.co"
+      ],
+      "taken_domains": [
+        "grahak.com",
+        "grahak.in",
+        "getgrahak.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Labh",
+      "strategy": "",
+      "available_domains": [
+        "labh.co"
+      ],
+      "taken_domains": [
+        "labh.com",
+        "labh.in",
+        "getlabh.com"
+      ],
+      "round_added": 1
+    },
+    {
+      "brand": "Kovly",
+      "strategy": "",
+      "available_domains": [
+        "kovly.in",
+        "getkovly.com",
+        "kovly.co"
+      ],
+      "taken_domains": [
+        "kovly.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Nuvio",
+      "strategy": "",
+      "available_domains": [
+        "nuvio.co"
+      ],
+      "taken_domains": [
+        "nuvio.com",
+        "nuvio.in",
+        "getnuvio.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Rivly",
+      "strategy": "",
+      "available_domains": [
+        "getrivly.com",
+        "rivly.co"
+      ],
+      "taken_domains": [
+        "rivly.com",
+        "rivly.in"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Zelvo",
+      "strategy": "",
+      "available_domains": [
+        "zelvo.co"
+      ],
+      "taken_domains": [
+        "zelvo.com",
+        "zelvo.in",
+        "getzelvo.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Nimva",
+      "strategy": "",
+      "available_domains": [
+        "nimva.in",
+        "getnimva.com",
+        "nimva.co"
+      ],
+      "taken_domains": [
+        "nimva.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Orvix",
+      "strategy": "",
+      "available_domains": [
+        "orvix.co"
+      ],
+      "taken_domains": [
+        "orvix.com",
+        "orvix.in",
+        "getorvix.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Quovo",
+      "strategy": "",
+      "available_domains": [
+        "quovo.in",
+        "getquovo.com",
+        "quovo.co"
+      ],
+      "taken_domains": [
+        "quovo.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Zylvo",
+      "strategy": "",
+      "available_domains": [
+        "getzylvo.com",
+        "zylvo.co"
+      ],
+      "taken_domains": [
+        "zylvo.com",
+        "zylvo.in"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Demly",
+      "strategy": "",
+      "available_domains": [
+        "demly.in",
+        "getdemly.com",
+        "demly.co"
+      ],
+      "taken_domains": [
+        "demly.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Signly",
+      "strategy": "",
+      "available_domains": [
+        "signly.co"
+      ],
+      "taken_domains": [
+        "signly.com",
+        "signly.in",
+        "getsignly.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Growva",
+      "strategy": "",
+      "available_domains": [
+        "getgrowva.com",
+        "growva.co"
+      ],
+      "taken_domains": [
+        "growva.com",
+        "growva.in"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Markly",
+      "strategy": "",
+      "available_domains": [
+        "markly.co"
+      ],
+      "taken_domains": [
+        "markly.com",
+        "markly.in",
+        "getmarkly.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Leadly",
+      "strategy": "",
+      "available_domains": [
+        "leadly.co"
+      ],
+      "taken_domains": [
+        "leadly.com",
+        "leadly.in",
+        "getleadly.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Bizly",
+      "strategy": "",
+      "available_domains": [
+        "bizly.co"
+      ],
+      "taken_domains": [
+        "bizly.com",
+        "bizly.in",
+        "getbizly.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Nuvra",
+      "strategy": "",
+      "available_domains": [
+        "nuvra.co"
+      ],
+      "taken_domains": [
+        "nuvra.com",
+        "nuvra.in",
+        "getnuvra.com"
+      ],
+      "round_added": 2
+    },
+    {
+      "brand": "Leadpath",
+      "strategy": "",
+      "available_domains": [
+        "leadpath.in",
+        "leadpath.co"
+      ],
+      "taken_domains": [
+        "leadpath.com",
+        "getleadpath.com"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Signpath",
+      "strategy": "",
+      "available_domains": [
+        "getsignpath.com"
+      ],
+      "taken_domains": [
+        "signpath.com",
+        "signpath.in",
+        "signpath.co"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Growlane",
+      "strategy": "",
+      "available_domains": [
+        "getgrowlane.com",
+        "growlane.co"
+      ],
+      "taken_domains": [
+        "growlane.com",
+        "growlane.in"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Markpulse",
+      "strategy": "",
+      "available_domains": [
+        "getmarkpulse.com",
+        "markpulse.co"
+      ],
+      "taken_domains": [
+        "markpulse.com",
+        "markpulse.in"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Demtrail",
+      "strategy": "",
+      "available_domains": [
+        "demtrail.com",
+        "demtrail.in",
+        "getdemtrail.com",
+        "demtrail.co"
+      ],
+      "taken_domains": [],
+      "round_added": 4
+    },
+    {
+      "brand": "Bizpath",
+      "strategy": "",
+      "available_domains": [
+        "bizpath.in",
+        "getbizpath.com"
+      ],
+      "taken_domains": [
+        "bizpath.com",
+        "bizpath.co"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Enqtrail",
+      "strategy": "",
+      "available_domains": [
+        "enqtrail.com",
+        "enqtrail.in",
+        "getenqtrail.com",
+        "enqtrail.co"
+      ],
+      "taken_domains": [],
+      "round_added": 4
+    },
+    {
+      "brand": "Pulselane",
+      "strategy": "",
+      "available_domains": [
+        "pulselane.in",
+        "getpulselane.com"
+      ],
+      "taken_domains": [
+        "pulselane.com",
+        "pulselane.co"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Signtrail",
+      "strategy": "",
+      "available_domains": [
+        "signtrail.in",
+        "getsigntrail.com",
+        "signtrail.co"
+      ],
+      "taken_domains": [
+        "signtrail.com"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Custlane",
+      "strategy": "",
+      "available_domains": [
+        "custlane.in",
+        "getcustlane.com",
+        "custlane.co"
+      ],
+      "taken_domains": [
+        "custlane.com"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Marktrail",
+      "strategy": "",
+      "available_domains": [
+        "marktrail.in",
+        "getmarktrail.com",
+        "marktrail.co"
+      ],
+      "taken_domains": [
+        "marktrail.com"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Signlane",
+      "strategy": "",
+      "available_domains": [
+        "signlane.in",
+        "getsignlane.com",
+        "signlane.co"
+      ],
+      "taken_domains": [
+        "signlane.com"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Leadtrail",
+      "strategy": "",
+      "available_domains": [
+        "leadtrail.co"
+      ],
+      "taken_domains": [
+        "leadtrail.com",
+        "leadtrail.in",
+        "getleadtrail.com"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Bizlane",
+      "strategy": "",
+      "available_domains": [
+        "getbizlane.com",
+        "bizlane.co"
+      ],
+      "taken_domains": [
+        "bizlane.com",
+        "bizlane.in"
+      ],
+      "round_added": 4
+    },
+    {
+      "brand": "Vyaparix",
+      "strategy": "",
+      "available_domains": [
+        "getvyaparix.com",
+        "vyaparix.co"
+      ],
+      "taken_domains": [
+        "vyaparix.com",
+        "vyaparix.in"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Kshetrix",
+      "strategy": "",
+      "available_domains": [
+        "kshetrix.in",
+        "getkshetrix.com",
+        "kshetrix.co"
+      ],
+      "taken_domains": [
+        "kshetrix.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Vanijix",
+      "strategy": "",
+      "available_domains": [
+        "vanijix.com",
+        "vanijix.in",
+        "getvanijix.com",
+        "vanijix.co"
+      ],
+      "taken_domains": [],
+      "round_added": 5
+    },
+    {
+      "brand": "Leadsignal",
+      "strategy": "",
+      "available_domains": [
+        "leadsignal.in",
+        "leadsignal.co"
+      ],
+      "taken_domains": [
+        "leadsignal.com",
+        "getleadsignal.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Signbridge",
+      "strategy": "",
+      "available_domains": [
+        "getsignbridge.com",
+        "signbridge.co"
+      ],
+      "taken_domains": [
+        "signbridge.com",
+        "signbridge.in"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Growspire",
+      "strategy": "",
+      "available_domains": [
+        "getgrowspire.com",
+        "growspire.co"
+      ],
+      "taken_domains": [
+        "growspire.com",
+        "growspire.in"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Markspire",
+      "strategy": "",
+      "available_domains": [
+        "markspire.in",
+        "getmarkspire.com",
+        "markspire.co"
+      ],
+      "taken_domains": [
+        "markspire.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Demiox",
+      "strategy": "",
+      "available_domains": [
+        "demiox.in",
+        "getdemiox.com",
+        "demiox.co"
+      ],
+      "taken_domains": [
+        "demiox.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Nudgio",
+      "strategy": "",
+      "available_domains": [
+        "nudgio.in",
+        "getnudgio.com",
+        "nudgio.co"
+      ],
+      "taken_domains": [
+        "nudgio.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Bizspire",
+      "strategy": "",
+      "available_domains": [
+        "bizspire.in",
+        "getbizspire.com",
+        "bizspire.co"
+      ],
+      "taken_domains": [
+        "bizspire.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Custspire",
+      "strategy": "",
+      "available_domains": [
+        "custspire.com",
+        "custspire.in",
+        "getcustspire.com",
+        "custspire.co"
+      ],
+      "taken_domains": [],
+      "round_added": 5
+    },
+    {
+      "brand": "Enqspire",
+      "strategy": "",
+      "available_domains": [
+        "enqspire.com",
+        "enqspire.in",
+        "getenqspire.com",
+        "enqspire.co"
+      ],
+      "taken_domains": [],
+      "round_added": 5
+    },
+    {
+      "brand": "Pulsora",
+      "strategy": "",
+      "available_domains": [
+        "pulsora.in",
+        "pulsora.co"
+      ],
+      "taken_domains": [
+        "pulsora.com",
+        "getpulsora.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Leadnix",
+      "strategy": "",
+      "available_domains": [
+        "leadnix.in",
+        "getleadnix.com",
+        "leadnix.co"
+      ],
+      "taken_domains": [
+        "leadnix.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Signix",
+      "strategy": "",
+      "available_domains": [
+        "signix.in",
+        "getsignix.com",
+        "signix.co"
+      ],
+      "taken_domains": [
+        "signix.com"
+      ],
+      "round_added": 5
+    },
+    {
+      "brand": "Sanket",
+      "strategy": "",
+      "available_domains": [
+        "sanket.co"
+      ],
+      "taken_domains": [
+        "sanket.com",
+        "sanket.in",
+        "getsanket.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Setu",
+      "strategy": "",
+      "available_domains": [
+        "setu.co"
+      ],
+      "taken_domains": [
+        "setu.com",
+        "setu.in",
+        "getsetu.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Sandesh",
+      "strategy": "",
+      "available_domains": [
+        "getsandesh.com",
+        "sandesh.co"
+      ],
+      "taken_domains": [
+        "sandesh.com",
+        "sandesh.in"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Vidur",
+      "strategy": "",
+      "available_domains": [
+        "getvidur.com",
+        "vidur.co"
+      ],
+      "taken_domains": [
+        "vidur.com",
+        "vidur.in"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Sakha",
+      "strategy": "",
+      "available_domains": [
+        "getsakha.com",
+        "sakha.co"
+      ],
+      "taken_domains": [
+        "sakha.com",
+        "sakha.in"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Niti",
+      "strategy": "",
+      "available_domains": [
+        "niti.co"
+      ],
+      "taken_domains": [
+        "niti.com",
+        "niti.in",
+        "getniti.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Patra",
+      "strategy": "",
+      "available_domains": [
+        "patra.co"
+      ],
+      "taken_domains": [
+        "patra.com",
+        "patra.in",
+        "getpatra.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Sangam",
+      "strategy": "",
+      "available_domains": [
+        "getsangam.com"
+      ],
+      "taken_domains": [
+        "sangam.com",
+        "sangam.in",
+        "sangam.co"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Mudra",
+      "strategy": "",
+      "available_domains": [
+        "mudra.co"
+      ],
+      "taken_domains": [
+        "mudra.com",
+        "mudra.in",
+        "getmudra.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Sarathi",
+      "strategy": "",
+      "available_domains": [
+        "sarathi.co"
+      ],
+      "taken_domains": [
+        "sarathi.com",
+        "sarathi.in",
+        "getsarathi.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Sabha",
+      "strategy": "",
+      "available_domains": [
+        "sabha.co"
+      ],
+      "taken_domains": [
+        "sabha.com",
+        "sabha.in",
+        "getsabha.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Sanjay",
+      "strategy": "",
+      "available_domains": [
+        "sanjay.co"
+      ],
+      "taken_domains": [
+        "sanjay.com",
+        "sanjay.in",
+        "getsanjay.com"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Kshetra",
+      "strategy": "",
+      "available_domains": [
+        "getkshetra.com",
+        "kshetra.co"
+      ],
+      "taken_domains": [
+        "kshetra.com",
+        "kshetra.in"
+      ],
+      "round_added": 3
+    },
+    {
+      "brand": "Artha",
+      "strategy": "",
+      "available_domains": [
+        "artha.co"
+      ],
+      "taken_domains": [
+        "artha.com",
+        "artha.in",
+        "getartha.com"
+      ],
+      "round_added": 3
+    }
+  ],
+  "rejected_brands": [
+    "Growpath",
+    "Vanik"
+  ],
+  "round_history": [
+    {
+      "round": 1,
+      "checked": 15,
+      "added": 15,
+      "rejected": 0,
+      "skipped": 0
+    },
+    {
+      "round": 2,
+      "checked": 15,
+      "added": 15,
+      "rejected": 0,
+      "skipped": 0
+    },
+    {
+      "round": 4,
+      "checked": 15,
+      "added": 14,
+      "rejected": 1,
+      "skipped": 0
+    },
+    {
+      "round": 5,
+      "checked": 15,
+      "added": 15,
+      "rejected": 0,
+      "skipped": 0
+    },
+    {
+      "round": 3,
+      "checked": 15,
+      "added": 14,
+      "rejected": 1,
+      "skipped": 0
+    }
+  ]
+}

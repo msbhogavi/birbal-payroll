@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KaushalStack Grow — Desktop campaign workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Color */
+      --bg:#eef1f6; --surface:#fff; --surface-2:#f7f8fb; --surface-3:#f0f3f8;
+      --line:#e1e6ef; --line-2:#cbd3e1; --ink:#111827; --ink-2:#4b5565; --ink-3:#6b7280;
+      --blue:#2457d6; --blue-2:#1d46ad; --blue-soft:#edf3ff; --blue-border:#8cb0ff;
+      --green:#087f5b; --green-soft:#eafaf3; --green-border:#b7e7d6;
+      --purple:#6d35d4; --purple-soft:#f4efff; --amber:#a75a00; --amber-soft:#fff7e8;
+      --red:#c93636; --wa:#25d366;
+      /* Evidence lineage motif — ops-led growth accent */
+      --evidence:#087f5b; --evidence-soft:#eafaf3; --evidence-width:3px;
+      /* Spacing scale */
+      --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:24px;
+      /* Radius scale */
+      --radius-sm:8px; --radius-md:10px; --radius-lg:12px; --radius-xl:14px; --radius-pill:999px;
+      /* Typography scale */
+      --text-xs:12px; --text-sm:13px; --text-base:14px; --text-lg:16px; --text-xl:22px;
+      --leading-tight:1.35; --leading-normal:1.5;
+      /* Elevation */
+      --shadow:0 18px 55px rgba(25,35,58,.12);
+      --shadow-sm:0 4px 16px rgba(25,35,58,.07);
+      /* Focus */
+      --focus-ring:0 0 0 3px var(--blue-soft);
+      /* Legacy aliases */
+      --r:var(--radius-xl); --r-sm:var(--radius-md);
+    }
+    *{box-sizing:border-box} html,body{height:100%;margin:0}
+    body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:var(--text-base);overflow:hidden;line-height:var(--leading-normal)}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,.chip:focus-visible,.objective:focus-visible,.schedule-choice:focus-visible,.flow-btn:focus-visible,.tool:focus-visible,.template:focus-visible,.variant-card:focus-visible,.design-opt:focus-visible,.seg button:focus-visible,.channel-tabs button:focus-visible,.prop-tabs button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+    .text-meta{font-size:var(--text-xs);color:var(--ink-3);line-height:var(--leading-normal)}
+    .text-caption{font-size:var(--text-xs);color:var(--ink-2);line-height:var(--leading-normal)}
+    .evidence-line{border-left:var(--evidence-width) solid var(--evidence)}
+    .is-selected{box-shadow:inset 0 0 0 1px var(--blue-border)}
+    .app{height:100vh;display:grid;grid-template-rows:64px auto 1fr 54px;background:var(--surface)}
+
+    /* Product context, not presentation navigation */
+    .topbar{display:flex;align-items:center;gap:18px;padding:0 22px;border-bottom:1px solid var(--line);background:var(--surface);z-index:20}
+    .brand{display:flex;align-items:center;gap:10px;min-width:188px}
+    .mark{width:34px;height:34px;border-radius:10px;background:var(--blue);display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px}
+    .brand strong{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);display:block}
+    .campaign-select{height:40px;min-width:282px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:flex;align-items:center;gap:10px}
+    .campaign-select .dot{width:8px;height:8px;border-radius:50%;background:var(--amber)}
+    .campaign-select b{font-size:13px}.campaign-select small{margin-left:auto;color:var(--ink-3)}
+    .autosave{font-size:12px;color:var(--green);display:flex;align-items:center;gap:6px}
+    .icon,[data-lucide]{width:18px;height:18px;stroke-width:1.75;flex-shrink:0}
+    .icon-sm,[data-lucide].icon-sm{width:14px;height:14px}
+    .icon-inline{display:inline-block;vertical-align:-3px;margin-right:5px}
+    .search-wrap{position:relative;margin-bottom:12px}
+    .search-wrap .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--ink-3);pointer-events:none}
+    .search-wrap .asset-search{padding-left:32px;margin-bottom:0}
+    .top-actions{margin-left:auto;display:flex;align-items:center;gap:9px}
+    .avatar{width:34px;height:34px;border-radius:50%;background:#e8ddd3;display:grid;place-items:center;font-weight:700;color:#6c4e3b}
+
+    .workspace{display:grid;grid-template-columns:240px minmax(680px,1fr) 310px;min-height:0}
+    .left,.right{background:var(--surface-2);overflow:auto}
+    .left{border-right:1px solid var(--line);padding:18px 15px}
+    .right{border-left:1px solid var(--line);padding:18px}
+    .canvas{min-width:0;overflow:auto;background:#f2f4f8}
+
+    .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+    .left h2{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:8px 0 4px}
+    .left .desc{font-size:12px;color:var(--ink-2);line-height:1.5;margin:0 0 18px}
+    .flow-nav{display:flex;flex-direction:column;gap:4px}
+    .flow-btn{border:0;background:transparent;border-radius:10px;padding:11px 12px;text-align:left;color:var(--ink-2);display:flex;align-items:center;gap:10px;position:relative}
+    .flow-btn .num{width:24px;height:24px;border:1px solid var(--line-2);border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:var(--surface)}
+    .flow-btn .copy b{display:flex;align-items:center;gap:6px;font-size:13px;color:inherit}.flow-btn .copy span{display:block;font-size:12px;color:var(--ink-2);margin-top:1px}
+    .flow-btn .flow-ico{width:16px;height:16px;opacity:.72}.flow-btn.active .flow-ico,.flow-btn.done .flow-ico{opacity:1}
+    .flow-btn.active{background:var(--surface);box-shadow:var(--shadow-sm);color:var(--blue)}
+    .flow-btn.active .num{background:var(--blue);border-color:var(--blue);color:#fff}
+    .flow-btn.done .num{background:var(--green-soft);border-color:#a9dfcc;color:var(--green)}
+    .flow-btn.done .num:after{content:"✓"}.flow-btn.done .num{font-size:0}
+    .target-summary{margin-top:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:13px}
+    .target-summary h3{font-size:12px;margin:0 0 9px}
+    .sum-row{display:flex;justify-content:space-between;gap:10px;font-size:11px;padding:6px 0;border-top:1px solid var(--line)}
+    .sum-row span{color:var(--ink-3)}.sum-row b{text-align:right;font-weight:600}
+
+    .screen{display:none;min-height:100%;padding:24px 28px 36px}.screen.active{display:block;animation:fade .18s ease-out}
+    @keyframes fade{from{opacity:.25}to{opacity:1}}
+    .screen-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:20px}
+    .screen-head h1{font-size:22px;letter-spacing:-.02em;margin:0 0 4px}.screen-head p{color:var(--ink-2);font-size:13px;margin:0}
+    .screen-head .head-actions{margin-left:auto;display:flex;gap:8px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 1px 2px rgba(20,30,50,.03)}
+    .btn{border:0;border-radius:9px;height:38px;padding:0 15px;font-weight:600;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+    .btn.primary{background:var(--blue);color:#fff}.btn.primary:hover{background:var(--blue-2)}
+    .btn.secondary{background:var(--surface);border:1px solid var(--line-2);color:var(--ink)}
+    .btn.ghost{background:transparent;color:var(--ink-2)}.btn.purple{background:var(--purple);color:#fff}
+    .btn.green{background:var(--green);color:#fff}.btn.small{height:31px;padding:0 11px}
+    .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;background:var(--surface-3);color:var(--ink-2)}
+    .pill.live{background:var(--green-soft);color:var(--green)}.pill.purple{background:var(--purple-soft);color:var(--purple)}
+
+    /* Strategy */
+    .strategy-grid.advanced-open{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:18px}
+    .strategy-grid{display:block}
+    .strategy-grid.advanced-open .advanced-panel{display:block}
+    .section-card{padding:18px;margin-bottom:14px}
+    .section-title{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+    .section-title .ico{display:none}
+    .section-title h3{font-size:14px;margin:0}.section-title p{font-size:11px;color:var(--ink-3);margin:2px 0 0}
+    .objectives{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+    .objective{border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:12px;text-align:left;min-height:72px}
+    .objective b{display:block;font-size:var(--text-xs)}.objective span{font-size:var(--text-xs);color:var(--ink-3);margin-top:4px;display:block}
+    .objective.on{border-color:var(--blue-border);background:var(--blue-soft);box-shadow:inset 0 0 0 1px var(--blue-border)}
+    .objective-head{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+    .objective-head [data-lucide]{width:15px;height:15px;color:var(--ink-3)}.objective.on .objective-head [data-lucide]{color:var(--blue)}
+    .keyword-box{display:flex;gap:8px;margin-bottom:12px}
+    .keyword-box input,.text-input{height:38px;border:1px solid var(--line-2);border-radius:9px;padding:0 11px;background:var(--surface);width:100%}
+    .chips{display:flex;flex-wrap:wrap;gap:7px}
+    .chip{border:1px solid var(--line-2);border-radius:999px;background:var(--surface);padding:7px 10px;font-size:11px;color:var(--ink-2)}
+    .chip:hover{border-color:#8cb0ff}.chip.on{background:var(--blue-soft);border-color:#8cb0ff;color:var(--blue);font-weight:600}
+    .chip.on:after{content:"  ✓";font-weight:800}.chip.interest.on:after{content:"  ×"}
+    .keyword-meta{font-size:var(--text-xs);color:var(--ink-3);margin-top:10px}
+    .demographics{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field label{display:block;font-size:var(--text-xs);font-weight:700;margin-bottom:7px}.field .hint{font-size:var(--text-xs);color:var(--ink-3);margin-top:6px}
+    .range-wrap{padding:6px 3px}.range-values{display:flex;justify-content:space-between;font-size:11px;font-weight:600;margin-bottom:5px}
+    input[type=range]{width:100%;accent-color:var(--blue)}
+    .seg{display:flex;border:1px solid var(--line-2);border-radius:9px;overflow:hidden}
+    .seg button{flex:1;border:0;border-right:1px solid var(--line);background:var(--surface);height:34px;font-size:11px}.seg button:last-child{border:0}.seg button.on{background:var(--blue-soft);color:var(--blue);font-weight:700}
+    .smart{padding:12px;border-radius:10px;background:var(--blue-soft);border:1px solid #cbdcff;font-size:11px;color:var(--ink-2);margin-top:12px;display:flex;align-items:center;gap:10px}
+    .map-card{position:relative;height:190px;overflow:hidden;background:#e9edf1}
+    .map-card svg{width:100%;height:100%}.map-overlay{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+    .radius-circle{width:126px;height:126px;border-radius:50%;background:rgba(36,87,214,.14);border:2px solid rgba(36,87,214,.55);display:grid;place-items:center}
+    .clinic-pin{width:20px;height:20px;border-radius:50% 50% 50% 0;background:var(--blue);transform:rotate(-45deg);box-shadow:0 3px 10px rgba(36,87,214,.35)}
+    .clinic-pin:after{content:"";width:7px;height:7px;border-radius:50%;background:#fff;position:absolute;margin:6px}
+    .radius-controls{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;border-top:1px solid var(--line)}
+    .reach-box{padding:17px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:14px}
+    .reach-box .number{font-size:26px;font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1.1}.reach-box p{font-size:11px;color:var(--ink-2);margin:6px 0}
+    .signal-card{display:grid;grid-template-columns:minmax(240px,1fr) auto;gap:18px;align-items:center;padding:15px 17px;margin-bottom:16px}
+    .signal-card h3{font-size:var(--text-lg);margin:3px 0 4px}.signal-card p{font-size:var(--text-xs);color:var(--ink-2);margin:0}
+    .signal-source{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:var(--text-xs);color:var(--ink-3)}
+    .signal-source span{border:1px solid var(--line);border-radius:var(--radius-pill);padding:4px 8px;background:var(--surface-2)}
+    .slot-meter{display:grid;grid-template-columns:repeat(5,25px);gap:5px}.slot-meter span{height:25px;border-radius:var(--radius-sm);background:var(--red);opacity:.78}
+    .slot-meter span.filled{background:var(--green);opacity:.28}.slot-label{font-size:var(--text-xs);color:var(--ink-3);margin-top:5px;text-align:right}
+
+    /* Creative workspace */
+    .creative-screen{padding:0!important}
+    .creative-layout{height:calc(100vh - 118px);display:grid;grid-template-columns:68px 250px minmax(440px,1fr) 330px}
+    .toolrail{background:var(--surface-2);color:var(--ink-3);padding:12px 8px;display:flex;flex-direction:column;gap:5px;border-right:1px solid var(--line)}
+    .tool{height:56px;border:0;border-radius:9px;background:transparent;color:inherit;font-size:10px;font-weight:600;display:flex;flex-direction:column;gap:3px;align-items:center;justify-content:center;padding:4px 2px}
+    .tool [data-lucide]{width:20px;height:20px;stroke-width:1.75}
+    .tool.on{background:var(--surface);color:var(--blue);box-shadow:var(--shadow-sm)}
+    .tool.on [data-lucide]{stroke:var(--blue)}
+    .tool span{font-size:10px;line-height:1.1;font-weight:600}
+    .assets{background:var(--surface);border-right:1px solid var(--line);padding:16px;overflow:auto}
+    .assets h3{font-size:14px;margin:0 0 12px}.asset-search{width:100%;height:36px;border:1px solid var(--line-2);border-radius:9px;padding:0 10px;margin-bottom:12px}
+    .template-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .template{aspect-ratio:4/5;border-radius:9px;background-size:cover;background-position:center;border:2px solid transparent;overflow:hidden;position:relative}.template.on{border-color:var(--blue)}.template span{position:absolute;left:5px;bottom:5px;background:rgba(17,24,39,.75);color:#fff;font-size:8px;padding:3px 5px;border-radius:4px}
+    .workarea{background:#dfe3ea;display:flex;flex-direction:column;min-width:0}
+    .workbar{height:48px;background:rgba(255,255,255,.82);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:7px;backdrop-filter:blur(8px)}
+    .workbar button{height:30px;border:1px solid var(--line);border-radius:7px;background:#fff;font-size:10px;padding:0 9px;cursor:pointer;transition:.12s;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:30px}
+    .workbar button:hover:not(:disabled){border-color:#9db9ff;background:var(--blue-soft)}
+    .workbar button.on{background:var(--blue-soft);border-color:#9db9ff;color:var(--blue);font-weight:700}
+    .workbar button:disabled{opacity:.4;cursor:not-allowed}
+    .workbar .sep{width:1px;height:22px;background:var(--line);margin:0 4px}
+    .canvas-area{flex:1;display:grid;place-items:center;padding:24px;overflow:auto;transition:transform .15s ease-out;transform-origin:center top}
+    .prop-panel{display:block}.prop-panel.hidden{display:none}
+    .asset-view{display:block}.asset-view.hidden{display:none}
+    .design-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .design-opt{border:1px solid var(--line);border-radius:9px;padding:10px;text-align:left;background:var(--surface);font-size:10px;cursor:pointer}
+    .design-opt.on{border-color:#9db9ff;background:var(--blue-soft)}
+    .design-opt b{display:block;font-size:11px;margin-bottom:2px}
+    .swatch-row{display:flex;gap:7px;margin-top:8px}
+    .swatch{width:28px;height:28px;border-radius:8px;border:2px solid transparent;cursor:pointer}.swatch.on{border-color:var(--ink)}
+    .variant-card{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px;cursor:pointer;text-align:left;background:var(--surface);width:100%}
+    .variant-card.on{border-color:#9db9ff;background:var(--blue-soft)}
+    .variant-card b{font-size:var(--text-sm);display:block}.variant-card span{font-size:var(--text-xs);color:var(--ink-3)}
+    .variant-preview{height:54px;border-radius:7px;background-size:cover;background-position:center;margin-top:8px}
+    .crop-preview{height:88px;border-radius:9px;background-size:cover;background-position:center;border:1px solid var(--line);position:relative;margin-top:8px}
+    .focal-dot{position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--blue);box-shadow:var(--shadow-sm);left:50%;top:45%;transform:translate(-50%,-50%);cursor:grab}
+    .post-art{width:390px;aspect-ratio:4/5;background-size:cover;background-position:center;border-radius:3px;box-shadow:0 20px 50px rgba(25,35,58,.23);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+    .post-art.split-layout:after{inset:48% 0 0}
+    .post-art.split-layout .art-copy{position:relative;background:#fff;color:var(--ink);padding:14px 16px;margin:0}
+    .post-art.split-layout .art-copy .offer{color:var(--blue)}
+    .post-art:after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(transparent,rgba(8,15,29,.83))}
+    .art-copy{position:absolute;z-index:2;left:30px;right:30px;bottom:38px;color:#fff}
+    .art-copy .offer{display:inline-block;background:#fff;color:var(--blue);font-size:11px;font-weight:800;padding:6px 9px;border-radius:6px;margin-bottom:13px}
+    .art-copy h2{font-size:31px;line-height:1.06;letter-spacing:-.03em;margin:0 0 10px}.art-copy p{font-size:13px;margin:0;max-width:280px}.art-logo{position:absolute;z-index:3;left:28px;top:24px;display:flex;gap:8px;align-items:center;color:#fff;font-size:11px;font-weight:700}.art-logo b{width:27px;height:27px;border-radius:8px;background:var(--blue);display:grid;place-items:center}
+    .zoom{height:38px;display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,.85);border-top:1px solid var(--line);font-size:10px}
+    .properties{background:var(--surface);border-left:1px solid var(--line);padding:17px;overflow:auto}
+    .prop-tabs{display:flex;border-bottom:1px solid var(--line);margin:-2px -2px 15px}.prop-tabs button{flex:1;border:0;border-bottom:2px solid transparent;background:transparent;padding:9px;font-size:11px;color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;gap:5px}.prop-tabs button.on{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
+    textarea{width:100%;border:1px solid var(--line-2);border-radius:9px;padding:10px;resize:vertical;font-size:11px;line-height:1.5}
+    .copy-count{text-align:right;font-size:var(--text-xs);color:var(--ink-3);margin-top:4px}
+    .variant{border:1px solid var(--line);border-radius:9px;padding:10px;font-size:10px;color:var(--ink-2);margin-top:7px}.variant.on{border-color:#96b4ff;background:var(--blue-soft)}
+    .channel-tabs{display:flex;gap:5px;margin:10px 0}.channel-tabs button{border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff;height:29px;padding:0 9px;font-size:var(--text-xs)}.channel-tabs button.on{background:var(--blue-soft);border-color:#9db9ff;color:var(--blue)}
+    .wa-box{border-left:3px solid var(--wa);background:#f1fbf5;border-radius:var(--radius-sm);padding:10px;font-size:var(--text-xs);color:var(--ink-2);display:none;margin-top:10px}
+    .wa-box.visible{display:block}
+
+    /* Review */
+    .review-grid{display:grid;grid-template-columns:minmax(380px,.9fr) minmax(360px,1.1fr);gap:18px}
+    .preview-stack{padding:17px}.mini-post{max-width:330px;margin:auto;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
+    .mini-image{aspect-ratio:4/5;background-size:cover;background-position:center;position:relative}.mini-image:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(8,15,29,.82))}.mini-image b{position:absolute;z-index:2;left:20px;bottom:22px;right:20px;color:#fff;font-size:24px;line-height:1.08}
+    .review-card{padding:17px;margin-bottom:12px}.review-card h3{font-size:13px;margin:0 0 11px}
+    .check-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:11px}.check{width:20px;height:20px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;font-weight:700}
+    .measurement-card{border:1px solid var(--green-border);background:var(--green-soft);border-radius:var(--radius-md);padding:11px;margin-top:12px}
+    .measurement-card b{font-size:var(--text-xs)}.measurement-card p{font-size:var(--text-xs);color:var(--ink-2);margin:3px 0 0;line-height:var(--leading-normal)}
+    .comment{display:flex;gap:9px;padding:10px 0;border-top:1px solid var(--line)}.comment .mini-av{width:28px;height:28px;border-radius:50%;background:#f1d6c6;display:grid;place-items:center;font-size:var(--text-xs);font-weight:700}.comment p{font-size:var(--text-xs);margin:0}.comment span{font-size:var(--text-xs);color:var(--ink-3)}
+    .schedule-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .schedule-choice{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:left;background:var(--surface);cursor:pointer}
+    .schedule-choice.on{background:var(--blue-soft);border-color:#9db9ff}
+    .schedule-choice b{display:block;font-size:12px}.schedule-choice span{font-size:12px;color:var(--ink-2);margin-top:4px;display:block}
+    .schedule-choice-head{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+    .schedule-choice-head [data-lucide]{width:15px;height:15px;color:var(--ink-3)}.schedule-choice.on .schedule-choice-head [data-lucide]{color:var(--blue)}
+    .channel-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:var(--radius-sm);margin-top:8px}
+    .channel-icon{width:28px;height:28px;border-radius:var(--radius-sm);color:#fff;display:grid;place-items:center}
+    .channel-icon [data-lucide]{width:15px;height:15px;stroke:#fff}
+    .channel-icon.ig{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af)}.channel-icon.fb{background:#1877f2}.channel-icon.wa{background:var(--wa)}.channel-icon.wa [data-lucide]{stroke:#074724}
+    .channel-row b{font-size:var(--text-xs)}.channel-row span{font-size:var(--text-xs);color:var(--ink-3);display:block}.channel-row .right-action{margin-left:auto}
+
+    /* Performance */
+    .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}.kpi{padding:15px}.kpi .label{font-size:var(--text-xs);color:var(--ink-3)}.kpi .value{font-size:23px;font-weight:700;letter-spacing:-.03em;margin-top:4px}.kpi .delta{font-size:var(--text-xs);color:var(--green);margin-top:3px}.kpi.hero{background:var(--green-soft);border-color:var(--green-border)}.kpi.hero .value{color:var(--green)}
+    .attribution-strip{display:flex;align-items:center;gap:12px;padding:12px 14px;margin:-6px 0 16px;border:1px solid var(--line)}
+    .attribution-strip .status-dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:0 0 auto}
+    .attribution-strip b{font-size:var(--text-xs)}.attribution-strip p{font-size:var(--text-xs);color:var(--ink-3);margin:2px 0 0}.attribution-strip button{margin-left:auto}
+    .attribution-detail{display:none;padding:0 14px 13px;margin:-17px 0 16px;border:1px solid var(--line);border-top:0;background:var(--surface)}
+    .attribution-detail.open{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .trail-step{padding-top:12px;font-size:var(--text-xs);color:var(--ink-3)}.trail-step b{display:block;font-size:var(--text-xs);color:var(--ink);margin-bottom:2px}
+    .perf-grid{display:grid;grid-template-columns:minmax(500px,1.45fr) minmax(290px,.75fr);gap:16px}
+    .chart-card{padding:17px}.chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.chart-head h3{font-size:13px;margin:0}
+    .chart{height:230px;position:relative;border-left:1px solid var(--line);border-bottom:1px solid var(--line);background:repeating-linear-gradient(to bottom,transparent 0,transparent 44px,var(--line) 45px)}
+    .chart svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.chart-labels{display:flex;justify-content:space-between;font-size:var(--text-xs);color:var(--ink-3);margin-top:6px}
+    .recommend{padding:14px;margin-bottom:10px;border-left:var(--evidence-width) solid var(--blue)}.recommend h4{font-size:var(--text-xs);margin:0 0 4px}.recommend p{font-size:var(--text-xs);color:var(--ink-2);margin:0 0 10px;line-height:var(--leading-normal)}
+    .funnel-row{display:flex;align-items:center;gap:9px;margin:10px 0;font-size:var(--text-xs)}.funnel-row span:first-child{width:62px;color:var(--ink-2)}.funnel-bar{flex:1;height:20px;background:var(--surface-3);border-radius:var(--radius-sm);overflow:hidden}.funnel-bar i{display:block;height:100%;background:var(--blue);border-radius:var(--radius-sm)}.funnel-row b{width:43px;text-align:right}
+
+    /* Right context */
+    .right h3{font-size:var(--text-sm);margin:0 0 4px}.right .sub{font-size:var(--text-xs);color:var(--ink-3);margin-bottom:14px}
+    .next-card{background:var(--surface);border:1px solid var(--line);border-left:var(--evidence-width) solid var(--blue);border-radius:var(--radius-lg);padding:14px;margin-bottom:14px}.next-card .eyebrow{color:var(--ink-3)}.next-card h4{font-size:var(--text-sm);margin:6px 0}.next-card p{font-size:var(--text-xs);color:var(--ink-2);line-height:var(--leading-normal)}
+    .brief-list{display:flex;flex-direction:column}.brief-row{padding:10px 0;border-top:1px solid var(--line)}.brief-row span{font-size:var(--text-xs);color:var(--ink-3);display:block}.brief-row b{font-size:var(--text-xs)}
+    .dock{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding:0 18px;background:var(--surface);z-index:30}
+    .dock .next{display:flex;align-items:center;gap:9px;font-size:11px}.dock .next span{color:var(--ink-3)}
+    .dock-actions{margin-left:auto;display:flex;gap:8px}.wa-dock{border:1px solid #9be0b6;background:#f0fbf4;color:#08723a}
+    .toast{position:fixed;right:24px;bottom:72px;background:#152033;color:#fff;padding:11px 15px;border-radius:9px;box-shadow:var(--shadow);font-size:11px;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s;z-index:100}.toast.show{opacity:1;transform:none}
+    .drawer-scrim{position:fixed;inset:0;background:rgba(10,17,31,.38);z-index:80;opacity:0;pointer-events:none;transition:.2s}
+    .drawer-scrim.open{opacity:1;pointer-events:auto}
+    .boost-drawer{position:fixed;right:0;top:0;bottom:0;width:430px;background:var(--surface);z-index:90;box-shadow:-24px 0 70px rgba(16,24,40,.2);transform:translateX(105%);transition:.24s ease-out;display:flex;flex-direction:column}
+    .boost-drawer.open{transform:none}
+    .drawer-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:12px}
+    .drawer-head h2{font-size:17px;margin:0 0 3px}.drawer-head p{font-size:10px;color:var(--ink-3);margin:0}.drawer-head button{margin-left:auto}
+    .drawer-body{padding:18px 20px;overflow:auto;display:flex;flex-direction:column;gap:16px}
+    .boost-preview{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:11px;padding:10px}
+    .boost-preview .thumb{width:58px;height:72px;border-radius:7px;background-size:cover;background-position:center}
+    .boost-preview b{font-size:11px}.boost-preview span{font-size:9px;color:var(--ink-3);display:block}
+    .boost-group{border-top:1px solid var(--line);padding-top:15px}.boost-group:first-of-type{border:0;padding-top:0}
+    .boost-group h3{font-size:12px;margin:0 0 9px}.radio-stack{display:flex;flex-direction:column;gap:7px}
+    .radio-option{border:1px solid var(--line);border-radius:9px;padding:10px;display:flex;gap:9px;align-items:flex-start;font-size:10px}
+    .radio-option.on{border-color:#9db9ff;background:var(--blue-soft)}.radio-option input{accent-color:var(--blue)}
+    .radio-option b{display:block;font-size:11px}.radio-option span{color:var(--ink-3)}
+    .boost-audience{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px;font-size:10px}
+    .boost-audience b{display:block;font-size:11px;margin-bottom:4px}.budget-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .audience-provenance{display:flex;gap:7px;align-items:flex-start;margin-top:9px;padding-top:9px;border-top:1px solid var(--line);font-size:var(--text-xs);color:var(--ink-3);line-height:var(--leading-normal)}
+    .budget-grid input,.budget-grid select{width:100%;height:38px;border:1px solid var(--line-2);border-radius:9px;padding:0 10px;background:#fff}
+    .estimate{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px}
+    .estimate b{font-size:22px;font-weight:700;color:var(--ink)}.estimate span{font-size:var(--text-xs);color:var(--ink-3);display:block}
+    .closeout-card{padding:16px;border:1px solid var(--green-border);background:var(--green-soft);border-radius:var(--radius-lg);margin-top:14px;border-left:var(--evidence-width) solid var(--evidence)}
+    .closeout-card h4{font-size:var(--text-sm);margin:0 0 6px}.closeout-card p{font-size:var(--text-xs);color:var(--ink-2);margin:0 0 12px;line-height:var(--leading-normal)}
+    .closeout-actions{display:flex;gap:8px;flex-wrap:wrap}
+    @media(prefers-reduced-motion:reduce){.screen.active{animation:none}.toast,.modal,.boost-drawer,.drawer-scrim{transition:none}}
+    .drawer-foot{margin-top:auto;border-top:1px solid var(--line);padding:14px 20px;background:var(--surface);display:flex;gap:8px}.drawer-foot .btn.primary{flex:1}
+
+    /* Lifecycle + lineage */
+    .lifecycle-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;margin-bottom:16px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);flex-wrap:wrap}
+    .lifecycle-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-3)}
+    .lifecycle-step .dot{width:8px;height:8px;border-radius:50%;background:var(--line-2);flex:0 0 auto}
+    .lifecycle-step.done{color:var(--ink-2)}.lifecycle-step.done .dot{background:var(--green)}
+    .lifecycle-step.active{color:var(--blue);font-weight:700}.lifecycle-step.active .dot{background:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+    .lifecycle-step.pending .dot{background:var(--amber)}
+    .lineage-strip{display:none;align-items:center;gap:10px;padding:8px 18px;border-bottom:1px solid var(--line);background:var(--surface-2);font-size:var(--text-xs);color:var(--ink-2);overflow:auto;white-space:nowrap;border-left:var(--evidence-width) solid var(--evidence)}
+    .lineage-strip b{color:var(--ink);font-weight:600}.lineage-strip .sep{color:var(--ink-3)}
+    .advanced-toggle{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .advanced-panel{display:none}.advanced-panel.open{display:block}
+    .recommended-banner{padding:14px;border:1px solid var(--green-border);background:var(--green-soft);border-radius:var(--radius-md);margin-bottom:14px;border-left:var(--evidence-width) solid var(--evidence)}
+    .recommended-banner b{font-size:13px;display:block;margin-bottom:4px}.recommended-banner p{font-size:12px;color:var(--ink-2);margin:0;line-height:1.5}
+    .modal-scrim{position:fixed;inset:0;background:rgba(10,17,31,.42);z-index:120;opacity:0;pointer-events:none;transition:.2s}
+    .modal-scrim.open{opacity:1;pointer-events:auto}
+    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-48%);width:min(440px,92vw);background:var(--surface);border-radius:14px;box-shadow:var(--shadow);z-index:130;opacity:0;pointer-events:none;transition:.2s}
+    .modal-scrim.open+.modal,.modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+    .modal-head{padding:16px 18px;border-bottom:1px solid var(--line)}.modal-head h2{font-size:16px;margin:0}.modal-body{padding:16px 18px}.modal-foot{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end}
+    .gate-warn{padding:10px 12px;border-radius:9px;background:var(--amber-soft);border:1px solid #f0d090;font-size:12px;color:var(--ink-2);margin-top:10px;line-height:1.5}
+    .gate-warn.block{background:#fff0f0;border-color:#f0c0c0}
+    .boost-status{font-size:12px;color:var(--ink-2);padding:8px 10px;border-radius:8px;background:var(--surface-2);margin-top:8px}
+    .boost-status.pending{color:var(--amber)}.boost-status.active{color:var(--green)}.boost-status.blocked{color:var(--red)}
+    .perf-empty{padding:40px 24px;text-align:center}.perf-empty h3{font-size:16px;margin:0 0 8px}.perf-empty p{font-size:13px;color:var(--ink-2);max-width:420px;margin:0 auto 16px;line-height:1.55}
+    .editor-collapsed .assets,.editor-collapsed .properties{display:none}
+    .editor-collapsed .creative-layout{grid-template-columns:68px minmax(0,1fr)}
+    .editor-toggle{position:absolute;top:12px;right:12px;z-index:5}
+    .workarea{position:relative}
+    .age-range-track{position:relative;height:6px;background:var(--line);border-radius:999px;margin:18px 0 8px}
+    .age-range-fill{position:absolute;height:100%;background:var(--blue);border-radius:999px;left:35%;right:25%}
+    .age-range-track input[type=range]{position:absolute;width:100%;top:-8px;background:transparent;pointer-events:none;-webkit-appearance:none;appearance:none;height:22px;margin:0}
+    .age-range-track input[type=range]::-webkit-slider-thumb{pointer-events:auto;-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--blue);border:2px solid #fff;box-shadow:var(--shadow-sm);cursor:pointer}
+    .attribution-meta{font-size:12px;color:var(--ink-2);padding:10px 14px;border-top:1px solid var(--line);line-height:1.55}
+    .attribution-meta span{color:var(--ink-3)}
+    @media(max-width:1180px){
+      .workspace{grid-template-columns:210px minmax(620px,1fr)}
+      .right{display:none}
+      .lineage-strip{display:flex}
+      .creative-layout{grid-template-columns:60px 220px minmax(420px,1fr) 310px}
+    }
+    @media(max-width:900px){.editor-collapsed .creative-layout{grid-template-columns:52px minmax(0,1fr)}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="mark">KS</div><div><strong>KaushalStack Grow</strong><span>ReFunction Rehab · Pune</span></div></div>
+      <button class="campaign-select"><span class="dot" id="campaignDot"></span><b>Monsoon knee-care</b><small id="campaignStatusLabel">Draft ▾</small></button>
+      <div class="autosave"><i data-lucide="check-circle-2" class="icon-sm"></i> All changes saved</div>
+      <div class="top-actions">
+        <button class="btn ghost"><i data-lucide="help-circle" class="icon-sm"></i> Help</button>
+        <button class="btn secondary" id="inviteTop"><i data-lucide="user-plus" class="icon-sm"></i> Invite collaborator</button>
+        <div class="avatar">DP</div>
+      </div>
+    </header>
+    <div class="lineage-strip" id="lineageStrip">
+      <span class="eyebrow" style="margin:0;display:flex;align-items:center;gap:5px"><i data-lucide="git-branch" class="icon-sm"></i> Evidence</span>
+      <span class="sep">·</span>
+      <span><b id="lineageSlots">3 Friday slots open</b></span>
+      <span class="sep">·</span>
+      <span id="lineageGoal">Goal: More bookings</span>
+      <span class="sep">·</span>
+      <span id="lineageAudience">35–55 · 8 km Kothrud</span>
+    </div>
+
+    <div class="workspace">
+      <aside class="left">
+        <div class="eyebrow">Suggested from bookings</div>
+        <h2>Monsoon knee-care</h2>
+        <p class="desc" id="leftDesc">3 Friday slots are still open. This campaign was created to help fill them.</p>
+        <nav class="flow-nav">
+          <button class="flow-btn active" data-screen="strategy"><span class="num">1</span><span class="copy"><b><i data-lucide="target" class="flow-ico"></i>Insight & audience</b><span>From bookings and local demand</span></span></button>
+          <button class="flow-btn" data-screen="creative"><span class="num">2</span><span class="copy"><b><i data-lucide="pen-line" class="flow-ico"></i>Suggested post</b><span>Built for this booking gap</span></span></button>
+          <button class="flow-btn" data-screen="review"><span class="num">3</span><span class="copy"><b><i data-lucide="send" class="flow-ico"></i>Publish & promote</b><span>Same audience across channels</span></span></button>
+          <button class="flow-btn" data-screen="performance"><span class="num">4</span><span class="copy"><b><i data-lucide="bar-chart-3" class="flow-ico"></i>Bookings & next move</b><span>Verified results and actions</span></span></button>
+        </nav>
+        <div class="target-summary">
+          <h3>Campaign brief</h3>
+          <div class="sum-row"><span>Goal</span><b id="sumGoal">More bookings</b></div>
+          <div class="sum-row"><span>Audience</span><b id="sumAge">35–55 · All</b></div>
+          <div class="sum-row"><span>Area</span><b id="sumArea">8 km · Kothrud</b></div>
+          <div class="sum-row"><span>Interests</span><b id="sumInterests">Health, Yoga, Fitness</b></div>
+          <div class="sum-row"><span>Est. audience</span><b id="sumReach">42k–68k</b></div>
+        </div>
+      </aside>
+
+      <main class="canvas">
+        <!-- STRATEGY + TARGETING -->
+        <section class="screen active" id="strategy">
+          <div class="screen-head">
+            <div><h1>Your inherited audience</h1><p>Built from 90 days of bookings and local demand. Review only what needs changing.</p></div>
+            <div class="head-actions"><button class="btn secondary" id="saveAudience"><i data-lucide="users" class="icon-sm"></i> Use this audience</button><button class="btn primary" data-go="creative">Build the post <i data-lucide="arrow-right" class="icon-sm"></i></button></div>
+          </div>
+          <div class="card signal-card evidence-line">
+            <div>
+              <div class="eyebrow">From your appointment calendar</div>
+              <h3 id="signalHeadline">3 Friday assessment slots are still open</h3>
+              <p id="signalBody">Friday usually fills by Thursday. This campaign is set to bookings and will stop recommending spend once the slots are filled.</p>
+              <div class="signal-source"><span><i data-lucide="calendar-days" class="icon-sm icon-inline"></i>Booking calendar · last 90 days</span><span>Updated 8:45 AM</span></div>
+            </div>
+            <div>
+              <div class="slot-meter" id="slotMeter" aria-label="Two of five Friday slots filled"><span class="filled"></span><span class="filled"></span><span></span><span></span><span></span></div>
+              <div class="slot-label" id="slotLabel">2 filled · 3 open</div>
+            </div>
+          </div>
+          <div class="recommended-banner" id="recommendedBanner">
+            <b>Recommended local audience</b>
+            <p>Based on 90 days of knee-assessment bookings: ages 35–55, 8 km around Kothrud, Health & wellness interests. Most owners accept this and only change the offer.</p>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <button class="btn primary small" id="useRecommended"><i data-lucide="sparkles" class="icon-sm"></i> Use recommendation</button>
+              <button class="btn secondary small" id="toggleAdvanced"><i data-lucide="sliders-horizontal" class="icon-sm"></i> Edit advanced settings</button>
+            </div>
+          </div>
+          <div class="strategy-grid" id="strategyGrid">
+            <div class="advanced-panel" id="advancedPanel">
+              <div class="card section-card">
+                <div class="section-title"><div class="ico">1</div><div><h3>What you want from this post</h3><p>Sets the CTA and what we count as a result.</p></div></div>
+                <div class="objectives">
+                  <button class="objective on" data-goal="More bookings" aria-pressed="true"><div class="objective-head"><i data-lucide="calendar-check"></i><b>More bookings</b></div><span>Track appointments</span></button>
+                  <button class="objective" data-goal="More messages" aria-pressed="false"><div class="objective-head"><i data-lucide="message-circle"></i><b>More WhatsApp chats</b></div><span>Track conversations</span></button>
+                  <button class="objective" data-goal="More reach" aria-pressed="false"><div class="objective-head"><i data-lucide="radio"></i><b>More local reach</b></div><span>People nearby see it</span></button>
+                  <button class="objective" data-goal="More visits" aria-pressed="false"><div class="objective-head"><i data-lucide="mouse-pointer-click"></i><b>More site visits</b></div><span>Send people to your page</span></button>
+                </div>
+              </div>
+
+              <div class="card section-card">
+                <div class="section-title"><div class="ico">2</div><div><h3>Keywords</h3><p>Used for copy and hashtags. Meta targeting uses demographics below.</p></div></div>
+                <div class="keyword-box"><input id="keywordInput" placeholder="Add a keyword, e.g. sports injury rehab" /><button class="btn secondary" id="addKeyword">Add</button></div>
+                <div class="chips" id="keywordChips">
+                  <button class="chip on">physiotherapy near me</button><button class="chip on">knee pain treatment pune</button>
+                  <button class="chip on">monsoon joint pain</button><button class="chip">sports injury clinic</button>
+                  <button class="chip">back pain treatment</button><button class="chip">posture correction</button>
+                  <button class="chip">rehabilitation centre pune</button><button class="chip">senior mobility</button>
+                </div>
+                <div class="keyword-meta"><b id="keywordCount">3 selected</b> · about 2,400 local searches/month</div>
+              </div>
+
+              <div class="card section-card">
+                <div class="section-title"><div class="ico">3</div><div><h3>Demographics</h3><p>Age, gender, and language for Meta.</p></div></div>
+                <div class="demographics">
+                  <div class="field">
+                    <label>Age range</label>
+                    <div class="range-wrap">
+                      <div class="range-values"><span id="ageMinValue">35</span><span>to</span><span id="ageMaxValue">55</span></div>
+                      <div class="age-range-track" id="ageRangeTrack">
+                        <div class="age-range-fill" id="ageRangeFill"></div>
+                        <input type="range" id="ageMin" min="18" max="65" value="35" aria-label="Minimum age" />
+                        <input type="range" id="ageMax" min="18" max="65" value="55" aria-label="Maximum age" />
+                      </div>
+                      <div class="hint">Drag either handle. Minimum gap is 5 years.</div>
+                    </div>
+                  </div>
+                  <div class="field"><label>Gender</label><div class="seg" id="genderSeg"><button class="on" aria-pressed="true">All</button><button aria-pressed="false">Women</button><button aria-pressed="false">Men</button></div><div class="hint">Avoid narrowing unless the service truly requires it.</div></div>
+                  <div class="field"><label>Languages</label><div class="chips"><button class="chip lang on">English</button><button class="chip lang on">Hindi</button><button class="chip lang on">Marathi</button></div></div>
+                  <div class="field"><label>People most likely to respond</label><div class="seg" id="peopleSeg"><button class="on" aria-pressed="true">Local residents</button><button aria-pressed="false">Past visitors</button></div><div class="hint">Past visitors requires your Meta audience connection.</div></div>
+                </div>
+                <div class="smart"><b>Why this audience:</b> Most knee-assessment bookings come from people aged 35–55 within 8 km, using English or Marathi. <button class="btn secondary small" id="applySmart">Keep inherited audience</button></div>
+              </div>
+
+              <div class="card section-card">
+                <div class="section-title"><div class="ico">4</div><div><h3>Interests</h3><p>Signals that someone might book physio. Not medical labels.</p></div></div>
+                <div class="chips" id="interestChips">
+                  <button class="chip interest on">Health & wellness</button><button class="chip interest on">Yoga</button><button class="chip interest on">Fitness</button>
+                  <button class="chip interest">Running</button><button class="chip interest">Badminton</button><button class="chip interest">Senior care</button>
+                  <button class="chip interest">Orthopaedics</button><button class="chip interest">Sports medicine</button><button class="chip interest">Desk ergonomics</button>
+                </div>
+                <div class="keyword-meta">We do not use sensitive health categories as targeting.</div>
+              </div>
+            </div>
+
+            <aside>
+              <div class="card map-card">
+                <svg viewBox="0 0 500 240" aria-label="Map of Kothrud and nearby areas">
+                  <rect width="500" height="240" fill="#edf0f3"/><path d="M-20 170 C90 110 120 225 240 160 S390 100 530 148" fill="none" stroke="#fff" stroke-width="13"/>
+                  <path d="M30 10 C110 78 165 60 232 122 S370 190 470 206" fill="none" stroke="#d4dbe3" stroke-width="5"/>
+                  <path d="M80 0 L142 240 M275 0 L320 240 M420 0 L370 240" stroke="#d6dde4" stroke-width="3"/>
+                  <text x="80" y="75" fill="#8c96a3" font-size="15">Bavdhan</text><text x="270" y="68" fill="#8c96a3" font-size="15">Kothrud</text>
+                  <text x="315" y="185" fill="#8c96a3" font-size="15">Karve Nagar</text><text x="62" y="198" fill="#8c96a3" font-size="15">Warje</text>
+                </svg>
+                <div class="map-overlay"><div class="radius-circle"><div class="clinic-pin"></div></div></div>
+              </div>
+              <div class="card radius-controls"><div><b style="font-size:11px">ReFunction Rehab</b><div class="text-meta">Kothrud, Pune</div></div><select id="radiusSelect"><option value="3">3 km</option><option value="5">5 km</option><option value="8" selected>8 km</option><option value="12">12 km</option><option value="25">25 km</option></select></div>
+              <div class="reach-box evidence-line">
+                <div class="eyebrow">Estimated audience</div><div class="number" id="reachNumber">42,000–68,000</div>
+                <p id="reachDesc">People aged 35–55 within 8 km, matching 3 interests.</p>
+                <b class="text-caption" style="color:var(--green)">Fine for a first run</b>
+                <div class="keyword-meta">Estimate only. Actual reach depends on Meta's auction.</div>
+              </div>
+              <div class="card section-card" style="margin-bottom:0">
+                <div class="eyebrow">Why these settings</div>
+                <p style="font-size:11px;color:var(--ink-2);line-height:1.55">Knee assessments are 34% of recent bookings. “Physiotherapy near me” has about 2,400 monthly searches around Kothrud.</p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- CREATIVE WORKSPACE -->
+        <section class="screen creative-screen editor-collapsed" id="creative">
+          <div class="creative-layout">
+            <nav class="toolrail">
+              <button class="tool on" data-tool="templates" aria-label="Templates"><i data-lucide="layout-template"></i><span>Templates</span></button>
+              <button class="tool" data-tool="media" aria-label="Media"><i data-lucide="image"></i><span>Media</span></button>
+              <button class="tool" data-tool="text" aria-label="Text"><i data-lucide="type"></i><span>Text</span></button>
+              <button class="tool" data-tool="brand" aria-label="Brand"><i data-lucide="palette"></i><span>Brand</span></button>
+              <button class="tool" data-tool="resize" aria-label="Size"><i data-lucide="maximize-2"></i><span>Size</span></button>
+            </nav>
+            <aside class="assets" id="assetsPanel">
+              <div class="asset-view" data-view="templates">
+              <h3 id="assetTitle">Templates</h3><div class="search-wrap"><i data-lucide="search" class="search-icon"></i><input class="asset-search" placeholder="Search templates" /></div>
+              <div class="template-grid" id="templateGrid">
+                <button class="template on" data-img="https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=800&h=1000&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=250&h=310&fit=crop')"><span>August offer</span></button>
+                <button class="template" data-img="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50f?w=800&h=1000&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50f?w=250&h=310&fit=crop')"><span>Exercise</span></button>
+                <button class="template" data-img="https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=800&h=1000&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=250&h=310&fit=crop')"><span>Clinic room</span></button>
+                <button class="template" data-img="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&h=1000&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=250&h=310&fit=crop')"><span>With physio</span></button>
+              </div>
+              <div class="card" style="padding:11px;margin-top:12px"><p class="text-caption" style="margin:0">Portrait works best on Instagram. Logo stays in the corner on all of these.</p></div>
+              </div>
+              <div class="asset-view hidden" data-view="media">
+                <h3>Photos</h3><div class="search-wrap"><i data-lucide="search" class="search-icon"></i><input class="asset-search" placeholder="Search photos" /></div>
+                <div class="template-grid">
+                  <button class="template on" data-img="https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=800&h=1000&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=250&h=310&fit=crop')"><span>Clinic</span></button>
+                  <button class="template" data-img="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50f?w=800&h=1000&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50f?w=250&h=310&fit=crop')"><span>Exercise</span></button>
+                  <button class="template" data-img="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&h=1000&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=250&h=310&fit=crop')"><span>Doctor</span></button>
+                </div>
+                <button class="btn secondary small" style="width:100%;margin-top:10px" id="uploadMedia"><i data-lucide="upload" class="icon-sm"></i> Upload from device</button>
+              </div>
+              <div class="asset-view hidden" data-view="text">
+                <h3>Text styles</h3>
+                <div class="design-grid">
+                  <button class="design-opt on" data-text-style="offer"><b>Offer badge</b>20% OFF · AUGUST</button>
+                  <button class="design-opt" data-text-style="headline"><b>Headline</b>Large text on image</button>
+                  <button class="design-opt" data-text-style="body"><b>Subline</b>One supporting line</button>
+                  <button class="design-opt" data-text-style="cta"><b>Footer</b>Book · link in bio</button>
+                </div>
+              </div>
+              <div class="asset-view hidden" data-view="brand">
+                <h3>ReFunction brand kit</h3>
+                <div class="card" style="padding:11px"><div class="eyebrow">Logo</div><div style="display:flex;align-items:center;gap:8px;margin-top:6px"><div style="width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700">RR</div><span class="text-caption">ReFunction Rehab</span></div></div>
+                <div class="field" style="margin-top:10px"><label>Brand colours</label><div class="swatch-row" id="brandSwatches"><button class="swatch on" data-color="#2563eb" style="background:#2563eb"></button><button class="swatch" data-color="#08753b" style="background:#08753b"></button><button class="swatch" data-color="#1e293b" style="background:#1e293b"></button></div></div>
+                <div class="field"><label>Offer badge</label><input class="text-input" id="offerBadgeInput" value="20% OFF · AUGUST" /></div>
+              </div>
+              <div class="asset-view hidden" data-view="resize">
+                <h3>Platform formats</h3>
+                <button class="variant-card on" data-format="4/5" data-label="Instagram 4:5"><b>Instagram · 4:5</b><span>1080 × 1350</span></button>
+                <button class="variant-card" data-format="1/1" data-label="Facebook 1:1"><b>Facebook · 1:1</b><span>1080 × 1080</span></button>
+                <button class="variant-card" data-format="9/16" data-label="Story 9:16"><b>Story · 9:16</b><span>1080 × 1920</span></button>
+              </div>
+            </aside>
+            <div class="workarea">
+              <button class="btn secondary small editor-toggle" id="toggleEditorPanels"><i data-lucide="panel-left" class="icon-sm"></i> Customize layout</button>
+              <div class="workbar">
+                <button id="undoBtn" disabled aria-label="Undo"><i data-lucide="undo-2" class="icon-sm"></i></button><button id="redoBtn" disabled aria-label="Redo"><i data-lucide="redo-2" class="icon-sm"></i></button>
+                <span class="sep"></span>
+                <button class="format-btn on" data-format="4/5" data-width="390" data-label="Instagram 4:5">Instagram 4:5</button>
+                <button class="format-btn" data-format="1/1" data-width="390" data-label="Facebook 1:1">Facebook 1:1</button>
+                <button class="format-btn" data-format="9/16" data-width="280" data-label="Story 9:16">Story 9:16</button>
+              </div>
+              <div class="canvas-area" id="canvasArea">
+                <div class="post-art" id="postArt" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=800&h=1000&fit=crop')">
+                  <div class="art-logo"><b>RR</b> ReFunction Rehab</div>
+                  <div class="art-copy"><span class="offer" id="artOffer">20% OFF · AUGUST</span><h2 id="artHeadline">Monsoon knee-care: 20% off assessments</h2><p id="artBody">Same-week Friday slots in Kothrud.</p></div>
+                </div>
+              </div>
+              <div class="zoom"><button class="btn ghost small" id="zoomOut" aria-label="Zoom out"><i data-lucide="zoom-out" class="icon-sm"></i></button><span id="zoomLabel">100%</span><button class="btn ghost small" id="zoomIn" aria-label="Zoom in"><i data-lucide="zoom-in" class="icon-sm"></i></button><span style="color:var(--ink-2)" id="formatHint">Instagram 4:5</span></div>
+            </div>
+            <aside class="properties">
+              <div class="prop-tabs" id="propTabs"><button class="on" data-tab="copy"><i data-lucide="file-text" class="icon-sm"></i> Copy</button><button data-tab="design"><i data-lucide="paintbrush" class="icon-sm"></i> Design</button><button data-tab="variants"><i data-lucide="layers" class="icon-sm"></i> Variants</button></div>
+
+              <div class="prop-panel" id="propCopy">
+              <div class="field"><label>Headline</label><input class="text-input" id="headlineInput" value="Monsoon knee-care: 20% off assessments" /></div>
+              <div class="field" style="margin-top:13px"><label id="captionLabel">Instagram caption</label><textarea id="captionInput" rows="7">Monsoon knee-care: 20% off physio assessments in August. Book via link in bio or WhatsApp us at +91 98765 43210.</textarea><div class="copy-count"><span id="captionCount">204</span> / <span id="captionLimit">2,200</span></div></div>
+              <div class="field" style="margin-top:13px"><label>Hashtags</label><div class="chips" id="hashtagChips"><button class="chip on">#PhysiotherapyPune</button><button class="chip on">#KneePain</button><button class="chip on">#Kothrud</button><button class="chip" id="addHashtag">+ Add</button></div></div>
+              <div class="channel-tabs" id="channelTabs"><button class="on" data-channel="instagram" aria-pressed="true">Instagram</button><button data-channel="facebook" aria-pressed="false">Facebook</button><button data-channel="whatsapp" aria-pressed="false">WhatsApp</button><button data-channel="linkedin" aria-pressed="false">LinkedIn</button></div>
+              <div class="wa-box" id="waCopyPanel"><b style="color:#08753b;display:flex;align-items:center;gap:6px"><i data-lucide="message-circle" class="icon-sm"></i>WhatsApp copy</b><p class="text-caption">Shorter message with your booking link. Copy and send manually to opted-in contacts.</p><button class="btn secondary small" id="copyWa"><i data-lucide="copy" class="icon-sm"></i> Copy message</button></div>
+              <button class="btn primary" style="width:100%;margin-top:14px" data-go="review">Review and schedule <i data-lucide="arrow-right" class="icon-sm"></i></button>
+              </div>
+
+              <div class="prop-panel hidden" id="propDesign">
+                <div class="field"><label>Image crop & focal point</label>
+                  <div class="crop-preview" id="cropPreview" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=800&h=400&fit=crop')"><div class="focal-dot" id="focalDot"></div></div>
+                  <p class="text-meta" style="margin-top:6px">Drag the dot to keep faces and your logo in frame.</p>
+                </div>
+                <div class="field" style="margin-top:13px"><label>Layout style</label>
+                  <div class="design-grid">
+                    <button class="design-opt on" data-layout="overlay"><b>Text overlay</b>Headline on image</button>
+                    <button class="design-opt" data-layout="split"><b>Split card</b>Image top, copy bottom</button>
+                  </div>
+                </div>
+                <div class="field" style="margin-top:13px"><label>Text overlay</label>
+                  <div class="design-grid">
+                    <button class="design-opt on" data-overlay="all"><b>Show all</b>Offer + headline + body</button>
+                    <button class="design-opt" data-overlay="minimal"><b>Minimal</b>Headline only</button>
+                  </div>
+                </div>
+                <div class="field" style="margin-top:13px"><label>Accent colour</label>
+                  <div class="swatch-row" id="accentSwatches"><button class="swatch on" data-accent="#2563eb" style="background:#2563eb"></button><button class="swatch" data-accent="#08753b" style="background:#08753b"></button><button class="swatch" data-accent="#1e293b" style="background:#1e293b"></button></div>
+                </div>
+              </div>
+
+              <div class="prop-panel hidden" id="propVariants">
+                <p class="text-caption" style="margin-bottom:10px">Pick a starting angle. You can edit either way after.</p>
+                <button class="variant-card on" data-angle="offer" data-headline="Monsoon knee-care: 20% off assessments" data-caption="Monsoon knee-care: 20% off physio assessments in August. Book via link in bio or WhatsApp us at +91 98765 43210.">
+                  <b>Offer first</b><span>Leads with the August discount</span>
+                  <div class="variant-preview" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=400&h=200&fit=crop')"></div>
+                </button>
+                <button class="variant-card" data-angle="education" data-headline="Why knees ache more in monsoon" data-caption="Humid weather can make stiff joints feel worse. If pain lasts more than a few days, a physio check helps. ReFunction Rehab, Kothrud. Link in bio.">
+                  <b>Explain the problem</b><span>For people not ready to book yet</span>
+                  <div class="variant-preview" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50f?w=400&h=200&fit=crop')"></div>
+                </button>
+                <button class="variant-card" data-angle="trust" data-headline="Same physios. Same clinic." data-caption="Friday assessment slots open in Kothrud this August. 20% off for new bookings. refunction.in/aug or WhatsApp us.">
+                  <b>Clinic first</b><span>Name and location up front</span>
+                  <div class="variant-preview" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=200&fit=crop')"></div>
+                </button>
+                <button class="btn ghost" style="width:100%;margin-top:6px" id="regenerate"><i data-lucide="sparkles" class="icon-sm"></i> Try another angle</button>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- REVIEW AND PUBLISH -->
+        <section class="screen" id="review">
+          <div class="lifecycle-bar" id="reviewLifecycle">
+            <span class="lifecycle-step done" data-step="draft"><span class="dot"></span>Draft</span>
+            <span>→</span>
+            <span class="lifecycle-step" data-step="scheduled"><span class="dot"></span>Scheduled</span>
+            <span>→</span>
+            <span class="lifecycle-step" data-step="publishing"><span class="dot"></span>Publishing</span>
+            <span>→</span>
+            <span class="lifecycle-step" data-step="live"><span class="dot"></span>Live</span>
+            <span>→</span>
+            <span class="lifecycle-step" data-step="gathering"><span class="dot"></span>Gathering results</span>
+          </div>
+          <div class="screen-head"><div><h1>Check before it goes live</h1><p>Post, audience, schedule, and channels in one place.</p></div><div class="head-actions"><button class="btn secondary" id="shareReview"><i data-lucide="share-2" class="icon-sm"></i> Share for review</button></div></div>
+          <div class="review-grid">
+            <div class="card preview-stack">
+              <div class="mini-post"><div class="mini-image" id="miniImage" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=650&h=800&fit=crop')"><b id="miniHeadline">Monsoon knee-care: 20% off assessments</b></div><div style="padding:11px;font-size:10px;color:var(--ink-2)">Instagram · 4:5 · @refunction_rehab</div></div>
+              <div class="channel-tabs" id="reviewChannelTabs" style="justify-content:center"><button class="on" data-rchannel="instagram">Instagram</button><button data-rchannel="facebook">Facebook</button><button data-rchannel="whatsapp">WhatsApp</button></div>
+              <p id="reviewChannelNote" style="font-size:12px;color:var(--ink-2);text-align:center;margin:8px 0 0">Instagram will publish · Facebook preview only · WhatsApp copy manually</p>
+            </div>
+            <div>
+              <div class="card review-card"><h3>Checks</h3>
+                <div class="check-row"><span class="check">✓</span><div><b>Brand colours and logo</b><div class="text-meta">ReFunction kit applied</div></div></div>
+                <div class="check-row"><span class="check">✓</span><div><b>Booking link</b><div class="text-meta">refunction.in/aug</div></div></div>
+                <div class="check-row"><span class="check">✓</span><div><b>Inherited audience ready</b><div class="text-meta" id="reviewAudience">35–55 · 8 km around Kothrud · based on recent bookings</div></div></div>
+                <div class="check-row" id="checkOffer"><span class="check" id="checkOfferIcon">!</span><div><b>Offer and clinical claim</b><div style="font-size:12px;color:var(--ink-2)">20% off assessments requires owner approval before publish</div></div></div>
+                <div class="measurement-card"><b id="measurementSuccess">Success = a completed booking</b><p id="measurementDetail">Grow adds a campaign ID to refunction.in/aug and records a result only after the appointment is confirmed in your calendar.</p></div>
+              </div>
+              <div class="card review-card"><h3>Review <span class="pill" id="reviewStatus">Not shared</span></h3>
+                <p style="font-size:12px;color:var(--ink-2)">Share a view-only link. Reviewers can comment, not publish.</p>
+                <div class="comment" id="commentExample" style="display:none"><div class="mini-av">RS</div><div><p><b>Raj:</b> Say "same-week appointments" instead of "slots".</p><span>Just now · unresolved</span></div></div>
+                <div style="display:flex;gap:8px;margin-top:10px"><button class="btn secondary small" id="copyLink"><i data-lucide="link" class="icon-sm"></i> Copy review link</button><button class="btn secondary small" id="resolveComment"><i data-lucide="check" class="icon-sm"></i> Mark resolved</button></div>
+                <div class="gate-warn" id="approvalGate" style="display:none">Scheduling is paused until requested review comments are resolved and the offer is approved.</div>
+              </div>
+              <div class="card review-card"><h3>When to publish</h3>
+                <div class="schedule-row">
+                  <button class="schedule-choice on" data-schedule="recommended" aria-pressed="true"><div class="schedule-choice-head"><i data-lucide="clock"></i><b id="schedulePresetLabel">Wed 10:30 AM</b></div><span>Usually your busiest hour · IST</span></button>
+                  <button class="schedule-choice" data-schedule="custom" aria-pressed="false"><div class="schedule-choice-head"><i data-lucide="calendar"></i><b>Pick a time</b></div><span>Choose date, time and timezone</span></button>
+                  <button class="schedule-choice" data-schedule="now" aria-pressed="false"><div class="schedule-choice-head"><i data-lucide="zap"></i><b>Publish now</b></div><span>Post immediately after checks pass</span></button>
+                </div>
+                <div id="customScheduleFields" style="display:none;margin-top:10px;grid-template-columns:1fr 1fr;gap:10px">
+                  <div class="field"><label>Date</label><input class="text-input" type="date" id="scheduleDate" value="2026-08-06" /></div>
+                  <div class="field"><label>Time (IST)</label><input class="text-input" type="time" id="scheduleTime" value="10:30" /></div>
+                </div>
+                <div style="margin-top:12px">
+                  <div class="channel-row"><div class="channel-icon ig"><i data-lucide="camera"></i></div><div><b>Instagram</b><span>@refunction_rehab · Connected</span></div><span class="pill live right-action" id="igReady">Ready</span></div>
+                  <div class="channel-row"><div class="channel-icon fb"><i data-lucide="share-2"></i></div><div><b>Facebook</b><span id="fbStatus">Not connected · preview only</span></div><button class="btn secondary small right-action" id="connectFb"><i data-lucide="plug" class="icon-sm"></i> Connect</button></div>
+                  <div class="channel-row"><div class="channel-icon wa"><i data-lucide="message-circle"></i></div><div><b>WhatsApp message</b><span id="waConsentStatus">Manual send · 142 opted-in contacts eligible</span></div><button class="btn secondary small right-action" id="copyWaReview"><i data-lucide="copy" class="icon-sm"></i> Copy</button></div>
+                </div>
+                <label style="font-size:12px;display:flex;align-items:flex-start;gap:8px;margin-top:14px;line-height:1.5"><input type="checkbox" id="offerApproval" /> I approve this offer and clinical wording for publication. Required for healthcare promotions.</label>
+              </div>
+              <div class="card review-card"><h3>After publishing</h3>
+                <label style="font-size:12px;display:flex;align-items:center;gap:8px"><input type="checkbox" id="addBoost" disabled /> Promote to this same audience on Meta</label>
+                <p id="boostEligibilityNote" style="font-size:12px;color:var(--ink-2);margin:8px 0 0">Boost unlocks after the post is live and Meta ad account payment is verified.</p>
+                <div id="boostPreview" style="display:none;margin-top:10px;padding:10px;background:var(--surface-2);border-radius:9px;font-size:12px">Same audience: 8 km, ages 35–55. Max ₹900 suggested to fill 1 remaining slot.</div>
+              </div>
+              <button class="btn primary" id="scheduleBtn" style="width:100%;margin-top:4px"><i data-lucide="calendar-check" class="icon-sm"></i> Schedule post</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- PERFORMANCE + GUIDED BOOST -->
+        <section class="screen" id="performance">
+          <div class="lifecycle-bar" id="perfLifecycle">
+            <span class="lifecycle-step done" data-step="draft"><span class="dot"></span>Draft</span>
+            <span>→</span>
+            <span class="lifecycle-step done" data-step="scheduled"><span class="dot"></span>Scheduled</span>
+            <span>→</span>
+            <span class="lifecycle-step done" data-step="publishing"><span class="dot"></span>Publishing</span>
+            <span>→</span>
+            <span class="lifecycle-step done" data-step="live"><span class="dot"></span>Live</span>
+            <span>→</span>
+            <span class="lifecycle-step active" data-step="gathering"><span class="dot"></span>Gathering results</span>
+          </div>
+          <div id="perfContent">
+          <div class="screen-head"><div><h1 id="performanceHeading">This campaign filled 2 of 3 open Friday slots</h1><p id="performanceSub">2 confirmed bookings matched through refunction.in/aug. 1 slot remains open. WhatsApp matches are reported separately and unconfirmed.</p></div><div class="head-actions"><button class="btn secondary"><i data-lucide="download" class="icon-sm"></i> Export</button><button class="btn secondary" id="boostTop"><i data-lucide="zap" class="icon-sm"></i> Edit boost</button></div></div>
+          <div class="kpis" id="kpiRow">
+            <div class="card kpi" id="kpiReach"><div class="label">Reach</div><div class="value" id="kpiReachVal">12,400</div><div class="delta" id="kpiReachDelta">vs 10,500 organic last week</div></div>
+            <div class="card kpi" id="kpiSecondary"><div class="label" id="kpiSecondaryLabel">Link clicks</div><div class="value" id="kpiSecondaryVal">186</div><div class="delta" id="kpiSecondaryDelta">1.5% of people reached</div></div>
+            <div class="card kpi hero"><div class="label" id="heroMetricLabel">Confirmed bookings</div><div class="value" id="heroMetricValue">2</div><div class="delta" id="heroMetricDelta">2 of 3 open slots filled · 1 remaining</div></div>
+            <div class="card kpi" id="kpiWa"><div class="label">WhatsApp</div><div class="value" id="kpiWaVal">22</div><div class="delta" id="kpiWaDelta">6 matched booking phrases · unconfirmed</div></div>
+            <div class="card kpi" id="kpiSpend"><div class="label">Spent</div><div class="value" id="kpiSpendVal">₹1,560</div><div class="delta" id="kpiSpendDelta">₹780 per paid-attributed booking · max ₹900 recommended</div></div>
+          </div>
+          <div class="card attribution-strip">
+            <span class="status-dot" id="attributionDot"></span>
+            <div><b id="attributionHeadline">2 confirmed bookings · last updated 12 min ago</b><p id="attributionSub">1 paid boost · 1 organic · 0 cancelled within 48h window · 6 WhatsApp phrase matches not counted</p></div>
+            <button class="btn ghost small" id="showAttribution"><i data-lucide="info" class="icon-sm"></i> How this is counted</button>
+          </div>
+          <div class="attribution-detail" id="attributionDetail">
+            <div class="trail-step"><b>1 · Campaign click</b>UTM + campaign ID on refunction.in/aug. 7-day click window.</div>
+            <div class="trail-step"><b>2 · Booking completed</b>14 started; 2 completed and confirmed in calendar within 48h.</div>
+            <div class="trail-step"><b>3 · Deduplicated</b>Repeat visits count once. Cancellations remove attribution. No click-only inference.</div>
+          </div>
+          <div class="attribution-meta" id="attributionMeta"><span>Model:</span> Last-click within 7 days · <span>Assisted:</span> 3 visits with no booking · <span>Unmatched:</span> 4 bookings without campaign tag · <span>Freshness:</span> Calendar sync 12 min ago</div>
+          <div class="perf-grid">
+            <div>
+              <div class="card chart-card">
+                <div class="chart-head"><h3 id="chartTitle">Bookings by day</h3><div class="seg" id="chartSeg" style="width:210px"><button class="on" data-metric="primary">Primary</button><button data-metric="clicks">Clicks</button><button data-metric="reach">Reach</button></div></div>
+                <div class="chart">
+                  <svg viewBox="0 0 700 230" preserveAspectRatio="none"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2457d6" stop-opacity=".28"/><stop offset="1" stop-color="#2457d6" stop-opacity="0"/></linearGradient></defs><path d="M0 205 C70 205 82 186 135 188 S210 158 270 163 S348 130 405 136 S498 89 550 96 S625 50 700 56 L700 230 L0 230Z" fill="url(#area)"/><path d="M0 205 C70 205 82 186 135 188 S210 158 270 163 S348 130 405 136 S498 89 550 96 S625 50 700 56" fill="none" stroke="#2457d6" stroke-width="4"/></svg>
+                </div>
+                <div class="chart-labels"><span>Aug 2</span><span>Aug 4</span><span>Aug 6</span><span>Aug 8</span><span>Aug 10</span></div>
+              </div>
+              <div class="card chart-card" style="margin-top:14px"><div class="chart-head"><h3 id="funnelTitle">Booking funnel</h3><span class="pill live" id="funnelPill">Matched to confirmed appointments</span></div>
+                <div id="funnelRows">
+                <div class="funnel-row"><span>Reached</span><div class="funnel-bar"><i style="width:100%"></i></div><b>12.4k</b></div>
+                <div class="funnel-row"><span>Clicked</span><div class="funnel-bar"><i style="width:1.5%"></i></div><b>186</b></div>
+                <div class="funnel-row"><span>Started</span><div class="funnel-bar"><i style="width:0.11%"></i></div><b>14</b></div>
+                <div class="funnel-row"><span>Booked</span><div class="funnel-bar"><i style="width:0.016%;background:var(--green)"></i></div><b>2</b></div>
+                </div>
+              </div>
+            </div>
+            <aside id="recommendations">
+              <div class="next-card" id="recPrimary"><h4 id="recPrimaryTitle">1 Friday slot is still open</h4><p id="recPrimaryBody">This audience produced 2 bookings within 5 km. Spend up to ₹900 over 3 days to try for the last slot — tied to remaining capacity, not a generic budget.</p><button class="btn primary small" id="applyRecommendation"><i data-lucide="zap" class="icon-sm"></i> Fill last slot · up to ₹900</button><button class="btn ghost small" id="fillLastSlotDemo" style="margin-top:8px"><i data-lucide="circle-check" class="icon-sm"></i> Fill all slots (demo)</button></div>
+              <div class="card recommend" id="recSecondary"><h4 id="recSecondaryTitle">Offer headline outperformed education</h4><p id="recSecondaryBody">Compared variants over 4 days · n=12,400 reach · offer 1.5% CTR vs education 0.6%. Confidence: moderate.</p><button class="btn secondary small" data-go="creative">Open editor</button></div>
+              <div class="card recommend" style="border-left-color:var(--evidence)" id="recWa"><h4>WhatsApp reminder — consent check required</h4><p>6 people matched booking phrases but did not finish. Only 4 of 6 have marketing opt-in. Draft sends to eligible contacts only.</p><button class="btn secondary small" id="makeWaReminder">Draft reminder (4 eligible)</button></div>
+              <div class="closeout-card" id="closeoutCard" style="display:none">
+                <h4 id="closeoutTitle">Campaign goal reached</h4>
+                <p id="closeoutBody">All open Friday slots are filled. You can archive this campaign or reuse the winning audience and offer setup.</p>
+                <div class="closeout-actions">
+                  <button class="btn primary small" id="duplicateCampaign"><i data-lucide="copy-plus" class="icon-sm"></i> Reuse winning setup</button>
+                  <button class="btn secondary small" id="archiveCampaign"><i data-lucide="archive" class="icon-sm"></i> Archive campaign</button>
+                </div>
+              </div>
+            </aside>
+          </div>
+          </div>
+          <div class="perf-empty" id="perfEmpty" style="display:none">
+            <h3 id="perfEmptyTitle">Post scheduled — results will appear here</h3>
+            <p id="perfEmptyBody">After publishing goes live, Grow waits 24–48 hours before showing booking attribution. Meta reach may appear sooner.</p>
+            <button class="btn secondary" id="simulateLive"><i data-lucide="play-circle" class="icon-sm"></i> Simulate live results (demo)</button>
+          </div>
+        </section>
+      </main>
+
+      <aside class="right">
+        <h3>Why this post</h3><div class="sub">Evidence carried through the campaign.</div>
+        <div class="next-card" id="contextCard"><h4 id="contextTitle">Check the audience</h4><p id="contextText">Accept the recommended audience or edit advanced settings.</p></div>
+        <div class="brief-list">
+          <div class="brief-row"><span>Goal</span><b id="ctxGoal">More bookings</b></div>
+          <div class="brief-row"><span>Why now</span><b id="ctxWhyNow">3 Friday slots open</b></div>
+          <div class="brief-row"><span>Offer</span><b>20% off assessments · August</b></div>
+          <div class="brief-row"><span>Landing page</span><b>refunction.in/aug</b></div>
+          <div class="brief-row"><span>Channels</span><b id="ctxChannels">Instagram + WhatsApp</b></div>
+          <div class="brief-row"><span>Boost budget</span><b id="ctxBoost">Not started · max ₹900 if 1 slot remains</b></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="dock">
+      <div class="next"><span>Campaign:</span><b>Monsoon knee-care</b><span>·</span><span id="dockStatus">Audience in progress</span></div>
+      <div class="dock-actions"><button class="btn primary" id="dockPrimary" data-go="creative">Build the post <i data-lucide="arrow-right" class="icon-sm"></i></button></div>
+    </footer>
+  </div>
+  <div class="drawer-scrim" id="drawerScrim"></div>
+  <aside class="boost-drawer" id="boostDrawer" aria-label="Guided boost settings">
+    <div class="drawer-head"><div><h2>Promote to the inherited audience</h2><p>Keep the audience that shaped this post, or adjust it before spending. You pay Meta directly.</p></div><button class="btn ghost small" id="closeBoost" aria-label="Close"><i data-lucide="x" class="icon-sm"></i> Close</button></div>
+    <div class="drawer-body">
+      <div class="boost-preview"><div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1519824145375-8d843a092f2f?w=180&h=230&fit=crop')"></div><div><b>Monsoon knee-care: 20% off assessments</b><span>Instagram · Live · refunction.in/aug</span></div></div>
+      <div class="boost-group"><h3>Status</h3><div class="boost-status blocked" id="boostStatusLine">Blocked until post is live and Meta payment method is verified.</div></div>
+      <div class="boost-group"><h3>Optimize for</h3><div class="radio-stack" id="boostGoals">
+        <label class="radio-option on" data-boost-goal="More bookings"><input type="radio" name="boostGoal" checked /><div><b>Bookings</b><span>Send people to refunction.in/aug</span></div></label>
+        <label class="radio-option" data-boost-goal="More messages"><input type="radio" name="boostGoal" /><div><b>WhatsApp messages</b><span>People message the clinic</span></div></label>
+        <label class="radio-option" data-boost-goal="More reach"><input type="radio" name="boostGoal" /><div><b>Reach nearby</b><span>Show the post to more local people</span></div></label>
+        <label class="radio-option" data-boost-goal="More visits"><input type="radio" name="boostGoal" /><div><b>Booking-page visits</b><span>Send people to refunction.in/aug</span></div></label>
+      </div><div class="keyword-meta" id="boostGoalNotice">Matches campaign goal: More bookings.</div></div>
+      <div class="boost-group"><h3>Audience</h3><div class="boost-audience"><b id="drawerAudience">8 km around Kothrud · Ages 35–55</b><span id="drawerInterests">Health & wellness, Yoga, Fitness · English, Hindi, Marathi</span><div class="audience-provenance"><span>Source:</span><span>Campaign audience, informed by aggregate booking patterns. Patient identities are never sent to Meta.</span></div><button class="btn ghost small" style="padding-left:0" id="editDrawerAudience">Edit in Strategy →</button></div></div>
+      <div class="boost-group"><h3>Budget and duration</h3><div class="budget-grid"><div class="field"><label>Daily budget</label><input type="number" id="boostDaily" value="500" min="200" step="100" /></div><div class="field"><label>Duration</label><select id="boostDays"><option value="3">3 days</option><option value="7" selected>7 days</option><option value="14">14 days</option><option value="30">30 days</option></select></div></div><div style="display:flex;justify-content:space-between;font-size:10px;margin-top:8px"><span style="color:var(--ink-3)">Total maximum spend</span><b id="boostTotal">₹3,500</b></div></div>
+      <div class="estimate"><span>Estimated reach (not guaranteed)</span><b id="boostEstimate">8,000–14,000 people</b><span id="clickEstimate">About 120–240 visits to refunction.in/aug</span></div>
+      <div class="boost-group"><h3>Payment</h3><div class="text-caption" style="line-height:1.6">Charged to your Meta ad account. Pause anytime. KaushalStack does not add markup on ad spend.</div></div>
+    </div>
+    <div class="drawer-foot"><button class="btn secondary" id="saveBoostDraft">Save draft</button><button class="btn primary" id="startBoost" disabled>Start boost · ₹3,500</button></div>
+  </aside>
+  <div class="modal-scrim" id="scheduleScrim"></div>
+  <div class="modal" id="scheduleModal" role="dialog" aria-labelledby="scheduleModalTitle">
+    <div class="modal-head"><h2 id="scheduleModalTitle">Confirm schedule</h2></div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.55" id="scheduleConfirmText">Publish to Instagram on Wed 10 Aug at 10:30 AM IST. Facebook remains preview-only until connected.</p>
+      <div class="gate-warn" id="scheduleWarn" style="display:none"></div>
+    </div>
+    <div class="modal-foot"><button class="btn secondary" id="cancelSchedule">Cancel</button><button class="btn primary" id="confirmSchedule">Confirm schedule</button></div>
+  </div>
+  <div class="modal-scrim" id="boostMismatchScrim"></div>
+  <div class="modal" id="boostMismatchModal" role="dialog">
+    <div class="modal-head"><h2>Boost goal differs from campaign</h2></div>
+    <div class="modal-body"><p style="font-size:13px;color:var(--ink-2);margin:0;line-height:1.55" id="boostMismatchText">Campaign success is measured as bookings, but this boost optimizes for reach. Continue anyway?</p></div>
+    <div class="modal-foot"><button class="btn secondary" id="cancelBoostMismatch">Change boost goal</button><button class="btn primary" id="confirmBoostMismatch">Continue with mismatch</button></div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <script src="grow-desktop-prototype.js"></script>
+</body>
+</html>

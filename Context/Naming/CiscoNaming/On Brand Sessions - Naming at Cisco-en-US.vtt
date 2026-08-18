@@ -1,0 +1,746 @@
+WEBVTT
+
+22454684-c1e6-45c5-bdcc-25c92ba6a269-0
+00:00:11.720 --> 00:00:12.800
+Hi, everyone, and welcome.
+
+15271f9a-f6c1-4f1b-a591-b9114f45831e-0
+00:00:12.800 --> 00:00:14.882
+Today,
+we're diving into a surprisingly
+
+15271f9a-f6c1-4f1b-a591-b9114f45831e-1
+00:00:14.882 --> 00:00:16.600
+important topic, naming at Cisco.
+
+fc1dab21-0dd7-463a-87b0-54c3e93cab92-0
+00:00:16.800 --> 00:00:19.909
+I'm joined by Greg Alger,
+who leads Cisco's naming practice,
+
+fc1dab21-0dd7-463a-87b0-54c3e93cab92-1
+00:00:19.909 --> 00:00:23.223
+and it's been over a decade helping big
+brands, including Cisco,
+
+fc1dab21-0dd7-463a-87b0-54c3e93cab92-2
+00:00:23.223 --> 00:00:24.600
+make sense of their naming.
+
+e4753d3e-be8f-4fe3-acfb-c78a89024ce9-0
+00:00:24.840 --> 00:00:26.160
+Greg, thanks for joining us.
+
+541a2348-dcc7-4aa9-899a-6f35a2b1c913-0
+00:00:27.160 --> 00:00:27.960
+Great to be here.
+
+4f72f456-fa43-467b-8d50-790638768424-0
+00:00:27.960 --> 00:00:28.720
+Thanks for having me.
+
+f278b978-322c-4405-858e-16f5a55f5f22-0
+00:00:29.280 --> 00:00:30.960
+All right, well,
+let's just jump right into it.
+
+e5ec9b58-9d0c-4f0d-89ac-31870009e9d7-0
+00:00:31.200 --> 00:00:33.880
+Why does naming matter so much at Cisco?
+
+3cdcfa25-f840-41b2-9507-0cfc2209cc70-0
+00:00:33.880 --> 00:00:35.640
+Can't you just pick something catchy?
+
+67f8f615-5844-4e72-8f0e-47def277cd27-0
+00:00:35.640 --> 00:00:36.560
+Call it a day.
+
+e1c290d4-4e82-497a-beac-8db07073d7f6-0
+00:00:37.880 --> 00:00:39.000
+I wish it were that simple.
+
+4e9a1792-680f-4cc5-8201-e5c0daa0a0aa-0
+00:00:39.000 --> 00:00:43.658
+Lisa names are one of the first things
+our customers see or hear about our
+
+4e9a1792-680f-4cc5-8201-e5c0daa0a0aa-1
+00:00:43.658 --> 00:00:44.280
+offerings.
+
+ef840eba-a041-412e-bdab-64c8c4d49ad5-0
+00:00:44.800 --> 00:00:48.560
+The right name helps people instantly
+understand what something is all about.
+
+b117b8ba-475b-4ff0-a45b-cdcbb8280484-0
+00:00:48.760 --> 00:00:51.600
+No guessing, no jargon, just clarity.
+
+78590aa6-9ade-422a-860f-718fa5aeaa95-0
+00:00:52.000 --> 00:00:54.792
+And at Cisco,
+we want to make things as easy and
+
+78590aa6-9ade-422a-860f-718fa5aeaa95-1
+00:00:54.792 --> 00:00:56.160
+transparent as possible.
+
+4bd23eb3-35e7-4c8e-b2db-d25d566ab29e-0
+00:00:56.400 --> 00:00:59.955
+So descriptive plain English names aren't
+just nice to have,
+
+4bd23eb3-35e7-4c8e-b2db-d25d566ab29e-1
+00:00:59.955 --> 00:01:02.520
+they're actually key to our brand
+strategy.
+
+3873bbe5-28a9-4d28-b91f-88cfbabc23fc-0
+00:01:03.440 --> 00:01:06.760
+Can you talk a little bit more about what
+you mean when you say descriptive?
+
+520f96f0-5692-4535-af42-b2374e34d37b-0
+00:01:06.760 --> 00:01:10.440
+Give me an example of a descriptive name,
+Greg, for sure.
+
+f2547150-c24b-4587-a89d-da350c1a4e12-0
+00:01:10.520 --> 00:01:14.670
+Yeah, when we say descriptive,
+we mean a name that tells you exactly
+
+f2547150-c24b-4587-a89d-da350c1a4e12-1
+00:01:14.670 --> 00:01:18.160
+what something is using plain industry
+standard language.
+
+e37692ce-f87a-42d9-af7d-e18ead4bfca6-0
+00:01:18.680 --> 00:01:23.055
+It's the difference between naming a
+product secure e-mail gateway versus
+
+e37692ce-f87a-42d9-af7d-e18ead4bfca6-1
+00:01:23.055 --> 00:01:26.840
+calling it something more creative like
+Excalibur, for example.
+
+7991f319-daf4-4007-b478-e2a440095bef-0
+00:01:27.560 --> 00:01:32.571
+The name Secure e-mail Gateway makes it
+instantly clear this is a gateway that
+
+7991f319-daf4-4007-b478-e2a440095bef-1
+00:01:32.571 --> 00:01:33.840
+secures your e-mail.
+
+487ef0ef-a394-46b9-8fea-0afede024af8-0
+00:01:34.960 --> 00:01:38.360
+A good descriptive name should answer at
+least one of these questions.
+
+fc2f5f2a-c07d-4595-90bf-5f8f3bcdc2b0-0
+00:01:38.720 --> 00:01:39.440
+What is it?
+
+c4c917ac-ca09-47ec-9ee8-1ff9353a0877-0
+00:01:39.800 --> 00:01:40.840
+What does it do?
+
+ddf2d739-66fc-4436-8407-57482857296c-0
+00:01:41.240 --> 00:01:42.120
+How does it work?
+
+c1ddf975-700e-4530-ae04-16a073f1dcb0-0
+00:01:42.440 --> 00:01:44.520
+No leaps of imagination required.
+
+f5f06f79-80f3-45a1-a079-fb16d3d75aa1-0
+00:01:44.840 --> 00:01:47.344
+That way, our customers,
+and our teams for that matter,
+
+f5f06f79-80f3-45a1-a079-fb16d3d75aa1-1
+00:01:47.344 --> 00:01:49.000
+know what they're getting right away.
+
+fd7cbc9c-d776-4b94-942b-8f1e3ca7fde2-0
+00:01:50.000 --> 00:01:53.150
+OK,
+so descriptive is the default here at
+
+fd7cbc9c-d776-4b94-942b-8f1e3ca7fde2-1
+00:01:53.150 --> 00:01:53.600
+Cisco.
+
+3235800b-b748-41b0-9661-d553425c3b5d-0
+00:01:53.760 --> 00:01:55.680
+Why is that our standard approach?
+
+f047fe82-a389-4d63-9c0c-da35cd904c2b-0
+00:01:55.680 --> 00:01:58.920
+Why aren't we more creative, exactly.
+
+38a96b96-762e-4c06-ae57-dafaa2bfa808-0
+00:01:58.920 --> 00:02:02.920
+Yeah, descriptive is our default,
+and there's a few main reasons for that.
+
+ad7636ab-df78-4a40-9ccb-0126495a8f7e-0
+00:02:03.280 --> 00:02:05.160
+First, it's customer centric.
+
+4aee299b-efb4-42da-8d81-5be5972b0114-0
+00:02:05.800 --> 00:02:08.644
+People prefer names they can immediately
+understand,
+
+4aee299b-efb4-42da-8d81-5be5972b0114-1
+00:02:08.644 --> 00:02:12.080
+especially in tech where things are
+already complicated enough.
+
+3b5bc93a-032f-4a47-94fe-4288b87eb44a-0
+00:02:12.680 --> 00:02:14.760
+Second, it saves time and money.
+
+861e8726-b5f9-4f5f-8b9b-117f303a729e-0
+00:02:15.040 --> 00:02:19.390
+Creative or abstract names might sound
+cool, but they're hard to trademark,
+
+861e8726-b5f9-4f5f-8b9b-117f303a729e-1
+00:02:19.390 --> 00:02:23.340
+they can run into legal trouble,
+and they usually require a lot more
+
+861e8726-b5f9-4f5f-8b9b-117f303a729e-2
+00:02:23.340 --> 00:02:25.000
+marketing to make them stick.
+
+b4a28459-d63e-468d-9bc3-8fb6309ffec5-0
+00:02:25.400 --> 00:02:29.440
+Descriptive names are quick,
+they're low risk, and they keep us agile.
+
+08fed4c9-f1d2-4365-a1b8-cc372470149f-0
+00:02:30.800 --> 00:02:35.680
+Well, we all know agile's good,
+and you talk about legal troubles.
+
+348980b0-88a7-4ec8-87f1-986d860fc4ec-0
+00:02:35.680 --> 00:02:39.080
+So what are the legal troubles when it
+comes to creative names?
+
+47dce199-7431-470b-840f-29cb03b4fc5c-0
+00:02:39.800 --> 00:02:41.440
+Yeah, yeah, good question.
+
+cc463029-1fe5-4127-8513-c5c5d9aa1258-0
+00:02:41.440 --> 00:02:42.840
+And where do I start?
+
+e2c789c7-81d0-4185-9df7-06fb8d5116f6-0
+00:02:43.400 --> 00:02:47.325
+9 times out of 10,
+if you have a great idea for a cool,
+
+e2c789c7-81d0-4185-9df7-06fb8d5116f6-1
+00:02:47.325 --> 00:02:50.760
+catchy name,
+someone else has had that idea too.
+
+9561938e-8cff-4105-a2c1-174181d565fe-0
+00:02:50.760 --> 00:02:55.349
+I hate to break it to you,
+but that person might actually have prior
+
+9561938e-8cff-4105-a2c1-174181d565fe-1
+00:02:55.349 --> 00:02:56.480
+trademark rights.
+
+e3f65888-9b11-4f9e-893b-aac833c14076-0
+00:02:57.320 --> 00:03:01.768
+And all it takes is 1 company in one
+jurisdiction where we do business,
+
+e3f65888-9b11-4f9e-893b-aac833c14076-1
+00:03:01.768 --> 00:03:04.920
+and we do business pretty much all over
+the world.
+
+630cddd8-e7d8-42b8-8ad2-a87ac3b0ac82-0
+00:03:04.960 --> 00:03:09.304
+But really it's just one claim to
+ownership and we essentially can't use
+
+630cddd8-e7d8-42b8-8ad2-a87ac3b0ac82-1
+00:03:09.304 --> 00:03:09.840
+the name.
+
+157566bc-53d1-421c-907e-0e274cc37f04-0
+00:03:10.880 --> 00:03:15.898
+So developing brand names that are
+legally and linguistically viable is
+
+157566bc-53d1-421c-907e-0e274cc37f04-1
+00:03:15.898 --> 00:03:17.920
+actually a specialized field.
+
+c4de4142-b599-4060-8482-96f29e65901c-0
+00:03:18.200 --> 00:03:19.600
+It takes expertise.
+
+17878cc6-487b-40a6-adc5-91c15a7d43f0-0
+00:03:19.640 --> 00:03:23.280
+It takes a good chunk of time and quite a
+bit of money to get it right.
+
+2367fcd3-9737-4922-bd09-569d95481568-0
+00:03:24.160 --> 00:03:26.225
+Yeah,
+that sounds like a big headache if it's
+
+2367fcd3-9737-4922-bd09-569d95481568-1
+00:03:26.225 --> 00:03:26.720
+done wrong.
+
+2abbb111-1c9b-481b-984f-6d6a92c6b401-0
+00:03:27.200 --> 00:03:31.520
+So how do descriptive names connect with
+our overall brand strategy?
+
+a6a2433d-e9d4-4ff1-82b5-cfb11da11e05-0
+00:03:32.120 --> 00:03:35.298
+Yeah,
+when you give things clear and intuitive
+
+a6a2433d-e9d4-4ff1-82b5-cfb11da11e05-1
+00:03:35.298 --> 00:03:38.613
+names,
+that supports us in building Cisco as our
+
+a6a2433d-e9d4-4ff1-82b5-cfb11da11e05-2
+00:03:38.613 --> 00:03:39.560
+primary brand.
+
+8738217f-02c0-48bb-b3bf-7a08aceff331-0
+00:03:40.040 --> 00:03:43.800
+Catchy and creative names are brand like
+in their own right.
+
+3eae5cfc-18ac-4ff6-affe-87688cf80d09-0
+00:03:44.080 --> 00:03:48.357
+And it may seem counterintuitive,
+but every time we put one of those in the
+
+3eae5cfc-18ac-4ff6-affe-87688cf80d09-1
+00:03:48.357 --> 00:03:51.059
+market,
+we're actually fragmenting the power of
+
+3eae5cfc-18ac-4ff6-affe-87688cf80d09-2
+00:03:51.059 --> 00:03:51.960
+the Cisco brand.
+
+a91cf184-f993-4358-bd1b-299539dcad00-0
+00:03:52.440 --> 00:03:54.605
+OK,
+I understand how it works for external
+
+a91cf184-f993-4358-bd1b-299539dcad00-1
+00:03:54.605 --> 00:03:56.520
+names and why that's really important.
+
+0441e58a-2dba-4c9e-ad82-83733186a93b-0
+00:03:56.520 --> 00:04:00.120
+But do we also apply the same strategy
+for internal naming?
+
+a9ed3fb1-1195-4831-81a2-50239c6540d2-0
+00:04:01.280 --> 00:04:02.000
+Great question.
+
+0ed2db42-6fd2-4662-866b-378e732b7e8a-0
+00:04:02.840 --> 00:04:05.160
+Yes, this applies to internal names too.
+
+5bd913b6-9e75-4f64-bd74-391b64e4b292-0
+00:04:05.560 --> 00:04:09.169
+So even if something's just for use
+inside Cisco,
+
+5bd913b6-9e75-4f64-bd74-391b64e4b292-1
+00:04:09.169 --> 00:04:15.304
+we want everyone to understand what it is
+right away, whether that's internal tools,
+
+5bd913b6-9e75-4f64-bd74-391b64e4b292-2
+00:04:15.304 --> 00:04:18.120
+team names, programs, or anything else.
+
+f36b7a82-5e48-4022-a48e-6ce345fe82a2-0
+00:04:18.320 --> 00:04:20.640
+They should all follow the same
+descriptive approach.
+
+d888ba4c-ff2d-49c3-a3cd-f60048ebe933-0
+00:04:21.400 --> 00:04:23.040
+It there's a few reasons.
+
+b61634a5-9a31-4f6b-b209-62ea1d9c3744-0
+00:04:23.080 --> 00:04:24.880
+It helps cut down confusion.
+
+21610718-f018-42d9-81d5-061a3ab7c49c-0
+00:04:25.040 --> 00:04:28.146
+It keeps things organized,
+and it actually makes collaborating
+
+21610718-f018-42d9-81d5-061a3ab7c49c-1
+00:04:28.146 --> 00:04:31.400
+across teams easier because we're all
+speaking the same language.
+
+764bfda3-33f3-4d50-a33e-098aa3ce8e2e-0
+00:04:31.880 --> 00:04:36.943
+And another really important reason is
+that it's sometimes the case that
+
+764bfda3-33f3-4d50-a33e-098aa3ce8e2e-1
+00:04:36.943 --> 00:04:42.562
+internal only names can see some external
+exposure, like in social posts, blogs,
+
+764bfda3-33f3-4d50-a33e-098aa3ce8e2e-2
+00:04:42.562 --> 00:04:43.880
+or speaking events.
+
+b83fb7fd-a51c-46c0-aaff-6c1d9d6e706e-0
+00:04:44.840 --> 00:04:47.398
+And, you know,
+sometimes our leaders even want to
+
+b83fb7fd-a51c-46c0-aaff-6c1d9d6e706e-1
+00:04:47.398 --> 00:04:50.520
+promote our internal initiatives to tout
+Cisco's innovation.
+
+c1119fd6-fa83-4bfa-ba83-72b6753667bd-0
+00:04:51.080 --> 00:04:52.200
+So yeah.
+
+14987203-2804-4fe4-8e7b-336c1ae091ef-0
+00:04:52.200 --> 00:04:55.680
+And with any external exposure comes
+increased legal risk.
+
+2ceef6df-b7de-40bf-b876-ab46f605b56a-0
+00:04:56.280 --> 00:04:58.080
+Yeah, there we are, back at legal risk.
+
+2251fd34-0747-4473-887a-5b0985114878-0
+00:04:58.200 --> 00:04:58.480
+Right.
+
+c79bd522-1b2a-4254-ba72-b5df522f7334-0
+00:04:59.760 --> 00:05:00.440
+Exactly.
+
+b5cbf464-fb82-472c-b57e-8ff4f1dca229-0
+00:05:00.480 --> 00:05:00.760
+Yeah.
+
+8cb8f7da-522d-4fad-90e7-443506d10e33-0
+00:05:00.760 --> 00:05:03.411
+No one can claim rights to descriptive
+names,
+
+8cb8f7da-522d-4fad-90e7-443506d10e33-1
+00:05:03.411 --> 00:05:06.120
+so we're guaranteed to be in the clear
+anyway.
+
+e475eda9-c006-48fe-9890-5d07e1ef5051-0
+00:05:06.120 --> 00:05:09.665
+If names for internal efforts are kept
+clear and straightforward,
+
+e475eda9-c006-48fe-9890-5d07e1ef5051-1
+00:05:09.665 --> 00:05:13.480
+they don't need to go through the full
+brand and legal review process.
+
+6691cde8-64f1-44dd-8015-d81d5acc563b-0
+00:05:13.520 --> 00:05:17.219
+But we still do ask that people check for
+conflicts internally,
+
+6691cde8-64f1-44dd-8015-d81d5acc563b-1
+00:05:17.219 --> 00:05:20.341
+and if there's any doubt of a name's
+descriptiveness,
+
+6691cde8-64f1-44dd-8015-d81d5acc563b-2
+00:05:20.341 --> 00:05:22.480
+it may actually require legal review.
+
+5aa11cd3-f07f-4daa-82ae-405ef830d0d2-0
+00:05:22.840 --> 00:05:26.760
+So it's best to check with us and open a
+name in case if you're unsure.
+
+1c3ff5ef-f07b-4da3-a381-236ddaf647e2-0
+00:05:27.360 --> 00:05:29.320
+OK, that all makes a ton of sense, Greg.
+
+bd3f59a4-a141-4168-86bf-6983cfab82ab-0
+00:05:29.320 --> 00:05:30.960
+So what is the process?
+
+30801782-8db8-434e-b073-cab416012fce-0
+00:05:30.960 --> 00:05:35.460
+If someone at Cisco needs help with a
+name for a new product or solution,
+
+30801782-8db8-434e-b073-cab416012fce-1
+00:05:35.460 --> 00:05:36.920
+How do they go about it?
+
+aa9ef641-142a-4542-b372-63ee412149ad-0
+00:05:38.280 --> 00:05:39.280
+Yeah, good question.
+
+c0723830-c21e-43b1-970d-bbcd2284b1e2-0
+00:05:39.320 --> 00:05:41.680
+It all starts right after product
+strategy.
+
+e5a1825b-7e0f-4671-af1d-74f281b9a9e1-0
+00:05:41.800 --> 00:05:43.520
+Don't wait until the last minute.
+
+5c7d37f7-f404-48d8-9bb4-8dfe947c1aa5-0
+00:05:43.880 --> 00:05:46.680
+First,
+open a naming project with our brand team.
+
+57393415-7d1e-4a33-aea0-aac15b93f335-0
+00:05:46.960 --> 00:05:49.920
+You don't even need a name yet,
+just the need for a name.
+
+49fcbbf8-936a-4489-a8cd-3cbdba14389f-0
+00:05:50.120 --> 00:05:51.400
+Get us involved early.
+
+0dd002c9-7776-4495-b651-764db120777a-0
+00:05:51.840 --> 00:05:57.200
+Then brainstorm descriptive options using
+industry standard terms and plain English.
+
+6957877f-6079-4092-ad91-77f60c01ef6b-0
+00:05:57.640 --> 00:05:59.960
+Check out what kind of language
+competitors are using.
+
+e3751c5c-fdce-4dd9-be26-327bc85ec333-0
+00:06:00.680 --> 00:06:03.699
+Once you have options,
+we can help narrow them down,
+
+e3751c5c-fdce-4dd9-be26-327bc85ec333-1
+00:06:03.699 --> 00:06:08.258
+check for internal conflicts and make
+sure they're clear and distinctive within
+
+e3751c5c-fdce-4dd9-be26-327bc85ec333-2
+00:06:08.258 --> 00:06:08.600
+Cisco.
+
+62f510fe-e9f2-40b3-9375-6ae2c3f969c3-0
+00:06:09.320 --> 00:06:12.372
+After leadership agreement and a final
+recommendation,
+
+62f510fe-e9f2-40b3-9375-6ae2c3f969c3-1
+00:06:12.372 --> 00:06:16.367
+we send the name through legal review for
+any risks and after approval,
+
+62f510fe-e9f2-40b3-9375-6ae2c3f969c3-2
+00:06:16.367 --> 00:06:17.200
+you're all set.
+
+05cd9f3a-d5df-4a0f-9207-02091ff5bb17-0
+00:06:18.520 --> 00:06:22.600
+OK, so to get people started,
+are there any big don'ts that you can
+
+05cd9f3a-d5df-4a0f-9207-02091ff5bb17-1
+00:06:22.600 --> 00:06:23.560
+share with them?
+
+410f8d98-206a-4993-bd66-c6605c5e2f4a-0
+00:06:23.960 --> 00:06:28.497
+Don't mash words together,
+don't get cute with spelling or syntax,
+
+410f8d98-206a-4993-bd66-c6605c5e2f4a-1
+00:06:28.497 --> 00:06:30.800
+and please don't make up acronyms.
+
+36955b41-a958-49fe-94a2-ebeb9f113f62-0
+00:06:31.000 --> 00:06:33.440
+Our goal is clarity, not confusion.
+
+32114be2-a170-419b-aef6-34809ec828db-0
+00:06:34.120 --> 00:06:36.606
+Also,
+always check for confusingly similar
+
+32114be2-a170-419b-aef6-34809ec828db-1
+00:06:36.606 --> 00:06:38.920
+names that might already exist at Cisco.
+
+79240a92-9984-49a2-a2a4-a371c0a9242b-0
+00:06:39.400 --> 00:06:43.176
+And remember, yeah,
+industry standard acronyms like VPN or
+
+79240a92-9984-49a2-a2a4-a371c0a9242b-1
+00:06:43.176 --> 00:06:48.040
+API along those lines are mostly fine,
+but for most other abbreviations and
+
+79240a92-9984-49a2-a2a4-a371c0a9242b-2
+00:06:48.040 --> 00:06:50.280
+creative shortcuts, that's a no go.
+
+e9b3d6f3-4e27-4c08-b1a6-a01d25bbd417-0
+00:06:50.600 --> 00:06:51.960
+OK, so I have a quick one.
+
+032c8518-975c-4dc1-93b0-d2f022e57da3-0
+00:06:51.960 --> 00:06:53.080
+What about exceptions?
+
+58ad9e0a-f6df-4cde-b2ad-ccc6f6b49aec-0
+00:06:53.080 --> 00:06:56.760
+Aren't there times where a more creative
+or unique name would make sense?
+
+37b1ba49-71a0-43de-bb47-f4d65065b432-0
+00:06:57.360 --> 00:06:59.400
+Yeah,
+that that's a very important question.
+
+fee58dcf-df5e-411b-9d27-f4bab748e5a2-0
+00:06:59.400 --> 00:07:05.560
+And there are rare cases like when we
+need a truly unique global brand.
+
+1b705bf3-216e-47a3-ab2b-d5646d32915d-0
+00:07:05.680 --> 00:07:08.800
+That's a key part of a very clear
+business strategy.
+
+6a4b06eb-de47-47ec-903e-767480e5b9c3-0
+00:07:09.400 --> 00:07:14.275
+Those will always require support at the
+ELT level in addition to substantial
+
+6a4b06eb-de47-47ec-903e-767480e5b9c3-1
+00:07:14.275 --> 00:07:15.400
+runway and budget.
+
+b09f84f5-cdc9-4780-b37f-f2d571a97a68-0
+00:07:15.880 --> 00:07:17.920
+But those are the exception, not the rule.
+
+42a711f3-2c63-42a9-8565-a2219ac54889-0
+00:07:18.240 --> 00:07:22.800
+And developing brand names is a wholly
+separate beast from descriptive naming.
+
+da148729-44b4-45ec-b9bb-3e744b52990c-0
+00:07:23.080 --> 00:07:26.728
+Like I said before,
+it involves a lot more time, cost,
+
+da148729-44b4-45ec-b9bb-3e744b52990c-1
+00:07:26.728 --> 00:07:28.320
+and legal due diligence.
+
+e97114aa-5fc9-48f4-b585-15fb86e9b8c6-0
+00:07:28.600 --> 00:07:32.560
+For 99% of what we do,
+Sticking to descriptive is the way to go.
+
+decd6ba0-4f3a-4431-8ccc-910e0948ea39-0
+00:07:32.720 --> 00:07:33.680
+That makes total sense.
+
+cc6514f6-0575-4143-92a7-20c121e084a0-0
+00:07:33.680 --> 00:07:36.370
+Greg,
+any final advice for teams out there
+
+cc6514f6-0575-4143-92a7-20c121e084a0-1
+00:07:36.370 --> 00:07:38.560
+facing the naming process at Cisco?
+
+25da3227-ada6-4da9-b7cf-182fa1a134e2-0
+00:07:39.400 --> 00:07:40.840
+Yeah, don't overthink it.
+
+8015c1e1-4ac4-44dc-ad53-9f296d96408d-0
+00:07:41.000 --> 00:07:44.760
+Focus on being clear and direct and get
+us involved early.
+
+bfb1dfe3-ad4d-4238-85c7-5c3901e2a866-0
+00:07:45.040 --> 00:07:48.913
+If you follow the framework,
+you'll save yourself a lot of time and
+
+bfb1dfe3-ad4d-4238-85c7-5c3901e2a866-1
+00:07:48.913 --> 00:07:51.477
+hassle,
+and you'll also help make Cisco make
+
+bfb1dfe3-ad4d-4238-85c7-5c3901e2a866-2
+00:07:51.477 --> 00:07:52.560
+sense to the world.
+
+2dc423c4-8ecf-4ec4-8b25-3d44e694450b-0
+00:07:53.120 --> 00:07:54.160
+And that's what it's all about.
+
+3757ac3e-37a2-4652-8844-4fc76930eee1-0
+00:07:54.920 --> 00:07:55.800
+That makes a lot of sense.
+
+f29d6db4-3afc-4d88-8e5d-d4432e12e23f-0
+00:07:55.800 --> 00:07:57.040
+Greg, thanks so much.
+
+134e722b-bc75-436d-a5e5-9e2ed28b0f9e-0
+00:07:57.040 --> 00:07:58.880
+We had this has been super helpful.
+
+3db948ea-cbf2-4f5b-a963-f5382d5d2819-0
+00:07:58.880 --> 00:08:02.651
+For more tips,
+check out the naming resources or reach
+
+3db948ea-cbf2-4f5b-a963-f5382d5d2819-1
+00:08:02.651 --> 00:08:04.160
+out to our brand team.
+
+a8e86592-5a90-4ab4-a32d-bd110de95e7c-0
+00:08:04.160 --> 00:08:05.240
+Happy naming everyone.

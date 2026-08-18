@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birbal Group Payroll &amp; HR Operations (Prototype)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5.2.8/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5.2.8/index.css" />
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="birbal-payroll-prototype.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Migration banner (ONB) — compact after dismiss -->
+    <div class="migration-banner hidden" id="migrationBanner" role="status">
+      <i data-lucide="alert-circle"></i>
+      <span class="banner-full"><strong>Import needs your review.</strong> <span id="migrationBannerText">2 import issues must be fixed before you can close this month.</span></span>
+      <span class="banner-compact hidden"><strong id="migrationBannerCompact">2 import issues</strong></span>
+      <button type="button" class="link-btn banner-full" id="reviewImportBtn">Review import →</button>
+      <button type="button" class="banner-dismiss" id="dismissBannerBtn" aria-label="Collapse alert">×</button>
+    </div>
+
+    <!-- Topbar -->
+    <header class="topbar" id="topbar">
+      <div class="topbar-brand">
+        <span class="brand-mark" aria-hidden="true"><i data-lucide="wallet"></i></span>
+        <div class="brand-text">
+          <strong>Birbal Group</strong>
+          <span>Payroll &amp; HR</span>
+        </div>
+      </div>
+      <div class="topbar-context" id="topbarContext">
+        <nav class="topbar-crumb" id="topbarCrumb" aria-label="Current page">
+          <span class="topbar-screen" id="topbarScreen">Month close</span>
+        </nav>
+        <button type="button" class="topbar-period-chip hidden" id="topbarPeriodChip" data-nav="dashboard">
+          <i data-lucide="calendar"></i>
+          <span id="topbarPeriodLabel">March 2026</span>
+        </button>
+        <span class="topbar-status-chip hidden" id="topbarStatusChip"></span>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" class="btn ghost small topbar-help-btn" id="helpBtn" aria-label="Help and guides">
+          <i data-lucide="help-circle"></i>
+          <span class="topbar-help-label">Guide</span>
+        </button>
+        <button type="button" class="topbar-user-btn" id="userMenuBtn" aria-label="Account menu" aria-haspopup="menu">
+          <span class="topbar-user-meta">
+            <strong>Arjun K.</strong>
+            <span>Payroll admin</span>
+          </span>
+          <span class="avatar">AK</span>
+          <i data-lucide="chevron-down" class="topbar-user-chevron" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="shell">
+      <nav class="sidebar" aria-label="Main navigation">
+        <button type="button" class="nav-item active" data-screen="dashboard">
+          <i data-lucide="clipboard-check"></i>
+          <span>Month close</span>
+        </button>
+        <button type="button" class="nav-item" data-screen="people">
+          <i data-lucide="users"></i>
+          <span>People</span>
+        </button>
+        <button type="button" class="nav-item" data-screen="payroll">
+          <i data-lucide="table-2"></i>
+          <span>Monthly Payroll</span>
+        </button>
+        <button type="button" class="nav-item" data-screen="settings">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </button>
+        <div class="sidebar-foot">
+          <span class="proto-badge">Powered by KaushalStack</span>
+        </div>
+      </nav>
+
+      <nav class="bottom-nav" aria-label="Mobile navigation">
+        <button type="button" class="bottom-nav-item active" data-screen="dashboard"><i data-lucide="clipboard-check"></i><span>Month close</span></button>
+        <button type="button" class="bottom-nav-item" data-screen="people"><i data-lucide="users"></i><span>People</span></button>
+        <button type="button" class="bottom-nav-item" data-screen="payroll"><i data-lucide="table-2"></i><span>Payroll</span></button>
+        <button type="button" class="bottom-nav-item" data-screen="settings"><i data-lucide="settings"></i><span>Settings</span></button>
+      </nav>
+
+      <!-- Main canvas -->
+      <main class="canvas" id="canvas">
+        <!-- P0 Dashboard -->
+        <section class="screen active" id="screen-dashboard" data-screen="dashboard">
+          <div class="dashboard-page">
+          <div class="dashboard-inner">
+          <div class="period-controls surface-card" id="periodBar">
+            <p class="period-controls-label">Filter this month</p>
+            <div class="period-controls-fields">
+            <label class="period-field">
+              <span class="field-label">Month</span>
+              <select id="periodMonth" aria-label="Month"></select>
+            </label>
+            <label class="period-field">
+              <span class="field-label">Year</span>
+              <select id="periodYear" aria-label="Year"></select>
+            </label>
+            <label class="period-field">
+              <span class="field-label">Brand</span>
+              <select id="periodBrand" aria-label="Brand">
+                <option value="">All brands</option>
+              </select>
+            </label>
+            <label class="period-field">
+              <span class="field-label">Location</span>
+              <select id="periodLocation" aria-label="Location">
+                <option value="">All locations</option>
+              </select>
+            </label>
+            <button type="button" class="btn ghost small" id="resetFiltersBtn">Reset filters</button>
+            </div>
+          </div>
+          <div class="period-strip period-strip--dashboard" id="periodStrip" aria-live="polite"></div>
+          <header class="period-hero">
+            <div>
+              <h1 class="display" id="dashboardTitle">March 2026</h1>
+              <p class="period-caption">Finish payroll, confirm payments, then lock the month</p>
+              <nav class="period-lifecycle" id="periodLifecycle" aria-label="Period lifecycle"></nav>
+              <div class="period-state-row">
+                <span class="chip period-state" id="periodStateChip">In progress</span>
+                <span class="text-meta" id="periodStateMeta">Month-close not complete</span>
+              </div>
+            </div>
+          </header>
+
+          <section class="doc-section surface-card metrics-section" id="metricsSection">
+            <h2 class="section-label">Period totals</h2>
+            <div class="metrics-inline" id="metricsInline"></div>
+          </section>
+
+          <section class="next-action-block" id="nextActionBlock"></section>
+
+          <div class="dashboard-two-col" id="dashboardIssuesCol">
+          <section class="doc-section surface-card blocker-section hidden" id="blockerSection">
+            <div class="section-head">
+              <h2 class="section-label">Import issues (fix first)</h2>
+              <span class="exception-count chip error" id="blockerCount">3 blocking</span>
+            </div>
+            <p class="text-meta section-desc">Fix these before you can close the month. Separate from unpaid or unsaved salaries below.</p>
+            <div class="exceptions-list" id="blockerList"></div>
+          </section>
+
+          <section class="doc-section surface-card" id="exceptionsSection">
+            <div class="section-head">
+              <h2 class="section-label">Items needing attention</h2>
+              <span class="exception-count" id="exceptionCount"></span>
+            </div>
+            <p class="section-muted-note">Finish the import review first. Then work through the items below.</p>
+            <div class="exceptions-list" id="exceptionsList"></div>
+            <button type="button" class="btn ghost small hidden" id="viewAllExceptionsBtn">View all items</button>
+            <div class="empty-state hidden" id="attentionEmpty">
+              <i data-lucide="circle-check"></i>
+              <p>All payroll items are done. You can move on to closing the month.</p>
+            </div>
+          </section>
+          </div>
+
+          <section class="doc-section surface-card location-section">
+            <div class="section-head">
+              <div>
+                <h2 class="section-label">By location</h2>
+                <p class="section-desc text-meta">Select a row to open payments and slips for that outlet.</p>
+              </div>
+            </div>
+            <div class="location-table">
+              <div class="location-table-head" aria-hidden="true">
+                <span>Location</span>
+                <span class="num">Staff</span>
+                <span class="num">Net total</span>
+                <span>Status</span>
+                <span class="location-action-col"></span>
+              </div>
+              <div class="location-list" id="locationAccordion"></div>
+            </div>
+          </section>
+
+          <section class="close-period-block hidden" id="closePeriodBlock">
+            <h2 class="section-label">Close this month</h2>
+            <p class="text-meta" id="closePeriodCopy">Complete the checklist before locking.</p>
+            <ul class="reconcile-checklist" id="reconcileChecklist"></ul>
+            <div class="close-actions">
+              <button type="button" class="btn secondary" id="exportDashBtn"><i data-lucide="download"></i> Export CSV</button>
+              <button type="button" class="btn primary" id="lockPeriodBtn" disabled><i data-lucide="lock"></i> Lock this month</button>
+            </div>
+          </section>
+          </div>
+          </div>
+        </section>
+
+        <!-- Payroll Work / Review -->
+        <section class="screen" id="screen-payroll" data-screen="payroll">
+          <div class="period-context-readonly" id="payrollPeriodContext">
+            <span id="payrollPeriodLabel"></span>
+            <button type="button" class="link-btn" data-nav="dashboard">Change period →</button>
+          </div>
+          <div class="period-strip period-strip--payroll" id="payrollPeriodStrip" aria-live="polite"></div>
+          <div class="screen-head payroll-head">
+            <div>
+              <h1 class="h1">Monthly payroll</h1>
+              <p class="subtitle" id="payrollSubtitle">Enter days worked, advances, and ESI/PF for this month</p>
+            </div>
+            <div class="mode-toggle" role="tablist" aria-label="Payroll mode">
+              <button type="button" class="mode-btn active" data-mode="work" role="tab" aria-selected="true">Enter payroll</button>
+              <button type="button" class="mode-btn" data-mode="review" role="tab" aria-selected="false">Payments &amp; slips</button>
+            </div>
+          </div>
+          <div class="toolbar">
+            <div class="search-wrap">
+              <i data-lucide="search" class="search-icon"></i>
+              <input type="search" class="search-input" id="payrollSearch" placeholder="Search employee…" />
+            </div>
+            <span class="toolbar-meta" id="saveProgress">8/11 saved · 2 unsaved</span>
+            <button type="button" class="btn primary" id="saveAllBtn" disabled>Save all changes</button>
+            <button type="button" class="btn ghost hidden" id="exportReviewBtn"><i data-lucide="download"></i> Export CSV</button>
+          </div>
+          <div class="table-wrap payroll-scroll desktop-only" id="payrollTableWrap">
+            <table class="data-table payroll-table" id="payrollTable">
+              <thead id="payrollThead"></thead>
+              <tbody id="payrollBody"></tbody>
+            </table>
+          </div>
+          <div class="payroll-cards mobile-only" id="payrollCards"></div>
+        </section>
+
+        <!-- Employees Directory -->
+        <section class="screen" id="screen-people" data-screen="people">
+          <div class="screen-head">
+            <div>
+              <h1 class="h1">People</h1>
+              <p class="subtitle">Staff directory and pay register for all outlets</p>
+            </div>
+          </div>
+          <div class="view-toggle" id="peopleToggle">
+            <button type="button" class="view-btn active" data-view="directory">Staff list</button>
+            <button type="button" class="view-btn" data-view="register">Pay register</button>
+          </div>
+          <p class="people-view-hint text-meta" id="peopleViewHint">Staff list: add and edit employees. Pay register: view pay rates and ESI/PF settings.</p>
+          <div class="toolbar">
+            <div class="search-wrap">
+              <i data-lucide="search" class="search-icon"></i>
+              <input type="search" class="search-input" id="employeeSearch" placeholder="Search name or code…" />
+            </div>
+            <button type="button" class="btn primary toolbar-action" id="addEmployeeBtn"><i data-lucide="plus"></i> Add employee</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="employeeTable">
+              <thead id="employeeThead"></thead>
+              <tbody id="employeeBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Employee detail -->
+        <section class="screen" id="screen-employee-detail" data-screen="employee-detail">
+          <div class="detail-header">
+            <button type="button" class="btn ghost back-btn" id="backToEmployees"><i data-lucide="arrow-left"></i> Back</button>
+            <div class="detail-title detail-title-with-avatar">
+              <div id="detailAvatarWrap" class="detail-avatar-wrap" aria-hidden="true"></div>
+              <div class="detail-title-text">
+                <span class="code" id="detailCode">EMP-001</span>
+                <h1 class="h1" id="detailName">Employee name</h1>
+                <span class="chip active" id="detailStatus">Active</span>
+              </div>
+            </div>
+          </div>
+          <div class="detail-layout">
+            <nav class="section-nav" id="employeeSectionNav" aria-label="Form sections">
+              <button type="button" class="section-tab active" data-section="basic">Basic</button>
+              <button type="button" class="section-tab" data-section="work">Work</button>
+              <button type="button" class="section-tab" data-section="salary">Salary</button>
+              <button type="button" class="section-tab" data-section="statutory">ESI &amp; PF</button>
+              <button type="button" class="section-tab" data-section="bank">Bank</button>
+            </nav>
+            <div class="detail-form" id="detailForm"></div>
+          </div>
+          <footer class="detail-footer">
+            <button type="button" class="btn ghost" id="cancelDetailBtn">Cancel</button>
+            <button type="button" class="btn secondary" id="generateLetterBtn"><i data-lucide="file-text"></i> Generate joining letter</button>
+            <button type="button" class="btn ghost danger-text detail-footer-danger" id="markLeftBtn">Mark as left</button>
+            <button type="button" class="btn primary" id="saveEmployeeBtn">Save</button>
+          </footer>
+        </section>
+
+        <!-- Settings -->
+        <section class="screen" id="screen-settings" data-screen="settings">
+          <div class="screen-head">
+            <div>
+              <h1 class="h1">Settings</h1>
+              <p class="subtitle">Organization, letterheads, and access</p>
+            </div>
+          </div>
+          <div class="settings-tabs" role="tablist" aria-label="Settings sections">
+            <button type="button" class="settings-tab active" role="tab" aria-selected="true" data-tab="org" id="settings-tab-org">Organization</button>
+            <button type="button" class="settings-tab" role="tab" aria-selected="false" data-tab="letterheads" id="settings-tab-letterheads">Letterheads</button>
+            <button type="button" class="settings-tab" role="tab" aria-selected="false" data-tab="import" id="settings-tab-import">Import</button>
+          </div>
+          <div class="settings-panel active" id="settingsOrg" role="tabpanel" aria-labelledby="settings-tab-org">
+            <p class="text-meta">You can't delete a brand or outlet that's assigned to employees.</p>
+            <div class="lookup-grid" id="lookupGrid"></div>
+          </div>
+          <div class="settings-panel" id="settingsLetterheads" role="tabpanel" aria-labelledby="settings-tab-letterheads" hidden>
+            <div class="settings-content-narrow">
+              <p class="text-meta">Upload letterhead for each brand. Used on salary slips and joining letters. PNG or JPG, max 2 MB.</p>
+              <div class="letterhead-list" id="letterheadList"></div>
+            </div>
+          </div>
+          <div class="settings-panel" id="settingsImport" role="tabpanel" aria-labelledby="settings-tab-import" hidden>
+            <div class="settings-content-narrow" id="importWizardPanel"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- Dirty dialog -->
+    <dialog class="modal modal-actions-wide" id="dirtyDialog">
+      <div class="modal-body">
+        <h2>Unsaved payroll changes</h2>
+        <p id="dirtyDialogMsg">You have unsaved rows. Save before leaving?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn ghost" data-dirty="stay">Stay on page</button>
+          <div class="modal-actions">
+            <button type="button" class="btn secondary" data-dirty="discard">Discard changes</button>
+            <button type="button" class="btn primary" data-dirty="save">Save all and continue</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Document drawer -->
+    <div class="drawer-backdrop hidden" id="drawerBackdrop"></div>
+    <aside class="drawer hidden" id="docDrawer" aria-label="Document preview">
+      <header class="drawer-head">
+        <div>
+          <h2 id="drawerTitle">Salary slip</h2>
+          <p class="text-meta" id="drawerMeta"></p>
+        </div>
+        <button type="button" class="icon-btn" id="closeDrawer" aria-label="Close"><i data-lucide="x"></i></button>
+      </header>
+      <div class="drawer-preview" id="drawerPreview">
+        <div class="pdf-mock" id="pdfMock"></div>
+      </div>
+      <footer class="drawer-foot">
+        <button type="button" class="btn secondary"><i data-lucide="download"></i> Download</button>
+        <button type="button" class="btn secondary"><i data-lucide="printer"></i> Print</button>
+        <button type="button" class="btn primary"><i data-lucide="share-2"></i> Share</button>
+      </footer>
+    </aside>
+
+    <!-- Mark paid confirmation -->
+    <dialog class="modal" id="paidDialog">
+      <div class="modal-body">
+        <h2>Confirm payment recorded</h2>
+        <p class="text-meta">This does not transfer money. It only records that you paid salary outside this app.</p>
+        <p id="paidDialogEmp"></p>
+        <div class="form-field" style="margin-top:12px">
+          <label for="paidMethod">Payment method</label>
+          <select id="paidMethod">
+            <option>Bank transfer</option>
+            <option>Cash</option>
+            <option>UPI</option>
+            <option>Cheque</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="paidDate">Payment date</label>
+          <input type="date" id="paidDate" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" id="cancelPaidBtn">Cancel</button>
+          <button type="button" class="btn primary" id="confirmPaidBtn">Mark as paid</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- ONB modal -->
+    <dialog class="modal wide" id="onbDialog">
+      <div class="modal-body">
+        <h2>Import review</h2>
+        <p class="text-meta">Check flagged rows before you confirm the import is correct.</p>
+        <ul class="recon-list" id="reconList"></ul>
+        <label class="checkbox-row">
+          <input type="checkbox" id="reconSignoff" />
+          <span>I confirm employee and payroll totals match our records.</span>
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" id="closeOnbBtn">Cancel</button>
+          <button type="button" class="btn primary" id="completeOnbBtn" disabled>Confirm import is correct</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Lock period confirmation -->
+    <dialog class="modal" id="lockDialog">
+      <div class="modal-body">
+        <h2 id="lockDialogTitle">Lock this month</h2>
+        <p class="text-meta">No one can edit payroll after you lock. Exports and payment records become final.</p>
+        <p id="lockDialogPeriod"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" id="cancelLockBtn">Cancel</button>
+          <button type="button" class="btn primary" id="confirmLockBtn"><i data-lucide="lock"></i> Lock this month</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Save all progress -->
+    <dialog class="modal" id="saveProgressDialog">
+      <div class="modal-body">
+        <h2>Saving employee payroll</h2>
+        <p class="text-meta" id="saveProgressStatus">Saving…</p>
+        <ul class="save-progress-list" id="saveProgressList"></ul>
+        <div class="modal-actions">
+          <button type="button" class="btn primary" id="closeSaveProgressBtn" disabled>Done</button>
+        </div>
+      </div>
+    </dialog>
+  </div>
+
+  <script src="birbal-payroll-prototype.js"></script>
+</body>
+</html>
